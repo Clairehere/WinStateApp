@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "446950756668",
+    "firebase_url": "https://winstateapp.firebaseio.com",
+    "project_id": "winstateapp",
+    "storage_bucket": "winstateapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446950756668:android:b4172f7a7bac7678",
+        "android_client_info": {
+          "package_name": "com.example.wilder.winstateapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446950756668-fo5viekh7d69rcb2ns5imorh72h8ra9s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wilder.winstateapp",
+            "certificate_hash": "e6cdfa22262e2e98be3af5cafa0861aacf76d77f"
+          }
+        },
+        {
+          "client_id": "446950756668-26vggvidscrg2oiuo7tm9oq0t7ajk1s2.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "446950756668-26vggvidscrg2oiuo7tm9oq0t7ajk1s2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDA9-DGsm3akf2_CYEH-gjiMOB2PD8QWHQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446950756668-26vggvidscrg2oiuo7tm9oq0t7ajk1s2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
