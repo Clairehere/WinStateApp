@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -27,17 +28,22 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import java.util.ArrayList;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
     Location mLastLocation = null;
     Location mLocationUser;
     FusedLocationProviderClient mFusedLocationClient;
     boolean mIsWaitingForGoogleMap = false;
-
+    ArrayList<VideoModel> mEvent = new ArrayList<>();
+    ArrayList<Marker> mEventMarker = new ArrayList<>();
+    boolean mClickTwice = false;
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +53,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(MapsActivity.this);
         askLocationPermission();
@@ -113,8 +118,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } else if (location != null) {
 
             LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-            CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(userLocation, 17);
-
+            CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(userLocation, 15);
 
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 mMap.setMyLocationEnabled(true);
@@ -177,18 +181,55 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             moveCameraOnUser(mLastLocation);
         }
 
-
         Resources ressource = getApplicationContext().getResources();
-        int widthDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, ressource.getDisplayMetrics());
-        int heightDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, ressource.getDisplayMetrics());
+        final int widthDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, ressource.getDisplayMetrics());
+        final int heightDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, ressource.getDisplayMetrics());
 
         BitmapDescriptor iconWinNews = BitmapDescriptorFactory.fromResource(R.drawable.winnews);
         BitmapDescriptor iconWinNewsJaune = BitmapDescriptorFactory.fromResource(R.drawable.winnews_jaune);
 
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(40.741895, -73.989308))
-                .title("Cancer")
-                .icon(iconWinNews));
+        mEvent.add(new VideoModel("Test1", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 43.5911392, 1.4434542999999849, 0));
+        mEvent.add(new VideoModel("Test2", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 42, 1.4434542999999849, 0));
+        mEvent.add(new VideoModel("Test3", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 44.5911392, 1.4434542999999849, 0));
+        mEvent.add(new VideoModel("Test4", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 45.5911392, 1.4434542999999849, 0));
+
+        for (int i = 0; i < mEvent.size(); i++) {
+
+            Marker eventMark = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(mEvent.get(i).getLatitude(), mEvent.get(i).getLongitude()))
+                    .title(mEvent.get(i).getTitle())
+                    .icon((BitmapDescriptorFactory.fromBitmap(resizeBitmap("winnews", widthDp, heightDp)))));
+
+            mEventMarker.add(eventMark);
+        }
+
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+
+                if (!mClickTwice) {
+
+                    Toast.makeText(MapsActivity.this, marker.getTitle() + " aperçu 1ere partie", Toast.LENGTH_SHORT).show();
+
+                    mClickTwice = true;
+                } else {
+
+                    Toast.makeText(MapsActivity.this, marker.getTitle() + " aperçu deuxieme partie", Toast.LENGTH_SHORT).show();
+
+                    marker.setIcon((BitmapDescriptorFactory.fromBitmap(resizeBitmap("winnews_jaune", widthDp, heightDp))));
+                    mClickTwice = false;
+                }
+
+                return false;
+            }
+        });
+
+    }
+
+    public Bitmap resizeBitmap(String drawableName, int width, int height) {
+        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(drawableName, "drawable", getPackageName()));
+        return Bitmap.createScaledBitmap(imageBitmap, width, height, false);
     }
 
 }
