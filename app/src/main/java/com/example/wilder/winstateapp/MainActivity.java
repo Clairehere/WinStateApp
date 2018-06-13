@@ -13,8 +13,5 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
-        DatabaseReference TagsSetRef = mdatabase.getReference("test");
-        TagsSetRef.setValue("cl");
     }
 }
