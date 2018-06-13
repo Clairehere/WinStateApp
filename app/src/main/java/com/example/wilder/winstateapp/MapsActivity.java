@@ -227,7 +227,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 } else {
 
-
                     Location eventLocation = new Location(marker.getTitle());
                     moveCameraOnUser(eventLocation);
 
