@@ -29,6 +29,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,7 +44,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     boolean mIsWaitingForGoogleMap = false;
     ArrayList<VideoModel> mEvent = new ArrayList<>();
     ArrayList<Marker> mEventMarker = new ArrayList<>();
-    boolean mOnDoubleClick;
     private GoogleMap mMap;
 
     @Override
@@ -178,6 +178,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        MapStyleOptions mapFilter = MapStyleOptions.loadRawResourceStyle(MapsActivity.this, R.raw.map_style);
+        googleMap.setMapStyle(mapFilter);
+
         if (mIsWaitingForGoogleMap) {
             moveCameraOnUser(mLastLocation);
         }
@@ -189,7 +192,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         BitmapDescriptor iconWinNews = BitmapDescriptorFactory.fromResource(R.drawable.winnews);
         BitmapDescriptor iconWinNewsJaune = BitmapDescriptorFactory.fromResource(R.drawable.winnews_jaune);
 
-        mEvent.add(new VideoModel("Test1", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 43.5911392, 1.4434542999999849, 0));
+        mEvent.add(new VideoModel("Le sport rend heureux, c’est mesuré !",
+                "Une étude portant sur plus de 500 000 personnes publiée dans leJournal of\n" +"Happiness Studies, a découvert quela pratique d’une activité physique\n" +
+                "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
+                "www.youtube.com", "journaliste 1", 43.5911392, 1.4434542999999849, 0));
         mEvent.add(new VideoModel("Test2", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 43.4811392, 1.4434542999999849, 0));
         mEvent.add(new VideoModel("Test3", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 43.3711392, 1.4434542999999849, 0));
         mEvent.add(new VideoModel("Test4", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 43.2611392, 1.4434542999999849, 0));
@@ -199,6 +205,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Marker eventMark = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(mEvent.get(i).getLatitude(), mEvent.get(i).getLongitude()))
                     .title(mEvent.get(i).getTitle())
+                    .snippet(mEvent.get(i).getDescription())
                     .icon((BitmapDescriptorFactory.fromBitmap(resizeBitmap("winnews", widthDp, heightDp)))));
 
             mEventMarker.add(eventMark);
@@ -209,36 +216,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public boolean onMarkerClick(Marker marker) {
 
-                if (!mOnDoubleClick) {
-
-                    new CountDownTimer(3000, 1) {
-                        public void onTick(long millisUntilFinished) {
-                            mOnDoubleClick = true;
-                            Toast.makeText(MapsActivity.this, "Appuyez de nouveau pour voir l'article dans son ensemble", Toast.LENGTH_SHORT).show();
-                        }
-
-                        public void onFinish() {
-                            mOnDoubleClick = false;
-                        }
-                    }.start();
-
                     Location eventLocation = new Location(marker.getTitle());
                     moveCameraOnUser(eventLocation);
-
-                } else {
-
-                    Location eventLocation = new Location(marker.getTitle());
-                    moveCameraOnUser(eventLocation);
-
-                    Toast.makeText(MapsActivity.this, marker.getTitle() + " aperçu deuxieme partie", Toast.LENGTH_SHORT).show();
-
-                    marker.setIcon((BitmapDescriptorFactory.fromBitmap(resizeBitmap("winnews_jaune", widthDp, heightDp))));
-
-                    mOnDoubleClick = false;
-
-                }
-
                 return false;
+            }
+        });
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+
+            Toast.makeText(MapsActivity.this, "Inflate Layout", Toast.LENGTH_SHORT).show();
+
+            marker.setIcon((BitmapDescriptorFactory.fromBitmap(resizeBitmap("winnews_jaune", widthDp, heightDp))));
+
             }
         });
 
