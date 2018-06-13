@@ -15,6 +15,6 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
         DatabaseReference TagsSetRef = mdatabase.getReference("test");
-        TagsSetRef.setValue("nom");
+        TagsSetRef.setValue("cl");
     }
 }
