@@ -11,6 +11,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -42,7 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     boolean mIsWaitingForGoogleMap = false;
     ArrayList<VideoModel> mEvent = new ArrayList<>();
     ArrayList<Marker> mEventMarker = new ArrayList<>();
-    boolean mClickTwice = false;
+    boolean mOnDoubleClick;
     private GoogleMap mMap;
 
     @Override
@@ -189,9 +190,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         BitmapDescriptor iconWinNewsJaune = BitmapDescriptorFactory.fromResource(R.drawable.winnews_jaune);
 
         mEvent.add(new VideoModel("Test1", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 43.5911392, 1.4434542999999849, 0));
-        mEvent.add(new VideoModel("Test2", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 42, 1.4434542999999849, 0));
-        mEvent.add(new VideoModel("Test3", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 44.5911392, 1.4434542999999849, 0));
-        mEvent.add(new VideoModel("Test4", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 45.5911392, 1.4434542999999849, 0));
+        mEvent.add(new VideoModel("Test2", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 43.4811392, 1.4434542999999849, 0));
+        mEvent.add(new VideoModel("Test3", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 43.3711392, 1.4434542999999849, 0));
+        mEvent.add(new VideoModel("Test4", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 43.2611392, 1.4434542999999849, 0));
 
         for (int i = 0; i < mEvent.size(); i++) {
 
@@ -208,17 +209,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public boolean onMarkerClick(Marker marker) {
 
-                if (!mClickTwice) {
+                if (!mOnDoubleClick) {
 
-                    Toast.makeText(MapsActivity.this, marker.getTitle() + " aperçu 1ere partie", Toast.LENGTH_SHORT).show();
+                    new CountDownTimer(3000, 1) {
+                        public void onTick(long millisUntilFinished) {
+                            mOnDoubleClick = true;
+                            Toast.makeText(MapsActivity.this, "Appuyez de nouveau pour voir l'article dans son ensemble", Toast.LENGTH_SHORT).show();
+                        }
 
-                    mClickTwice = true;
+                        public void onFinish() {
+                            mOnDoubleClick = false;
+                        }
+                    }.start();
+
+                    Location eventLocation = new Location(marker.getTitle());
+                    moveCameraOnUser(eventLocation);
+
                 } else {
+
+
+                    Location eventLocation = new Location(marker.getTitle());
+                    moveCameraOnUser(eventLocation);
 
                     Toast.makeText(MapsActivity.this, marker.getTitle() + " aperçu deuxieme partie", Toast.LENGTH_SHORT).show();
 
                     marker.setIcon((BitmapDescriptorFactory.fromBitmap(resizeBitmap("winnews_jaune", widthDp, heightDp))));
-                    mClickTwice = false;
+
+                    mOnDoubleClick = false;
+
                 }
 
                 return false;
