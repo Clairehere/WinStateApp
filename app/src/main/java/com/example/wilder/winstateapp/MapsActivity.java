@@ -93,6 +93,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
 
 
+        FloatingActionButton fabProfil = findViewById(R.id.fab_profil);
+        if(ConnectActivity.CONTRIBUTEUR){
+            fabProfil.setVisibility(View.VISIBLE);
+        }
+        fabProfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MapsActivity.this, ProfilActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setDownsampleEnabled(true)

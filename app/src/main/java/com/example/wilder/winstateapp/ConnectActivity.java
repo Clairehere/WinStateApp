@@ -64,6 +64,7 @@ public class ConnectActivity extends AppCompatActivity {
     private EditText entreprise;
     private ImageView profile;
     private EditText mdp;
+    public static boolean CONTRIBUTEUR = false;
 
 
     @Override
@@ -78,14 +79,15 @@ public class ConnectActivity extends AppCompatActivity {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if(radioButtonLecteur.isChecked()){
+                if (radioButtonLecteur.isChecked()) {
                     name.setVisibility(View.GONE);
                     entreprise.setVisibility(View.GONE);
 
                 }
-                if(radioButtonContributeur.isChecked()){
+                if (radioButtonContributeur.isChecked()) {
                     name.setVisibility(View.VISIBLE);
                     entreprise.setVisibility(View.VISIBLE);
+                    CONTRIBUTEUR = true;
                 }
             }
         });
@@ -94,34 +96,18 @@ public class ConnectActivity extends AppCompatActivity {
         name = findViewById(R.id.etLast);
         entreprise = findViewById(R.id.etFirst);
         profile = findViewById(R.id.ivProfile);
-        //mUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mStorageRef = FirebaseStorage.getInstance().getReference();
-
-        mAuth = FirebaseAuth.getInstance();
-        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 showPickImageDialog();
-
             }
-
-
         });
 
         btInscript.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 createAccount();
-
-
             }
         });
 
@@ -129,62 +115,24 @@ public class ConnectActivity extends AppCompatActivity {
 
     public void createAccount() {
 
-        final String condition1 = name.getText().toString();
-        final String condition2 = entreprise.getText().toString();
         mdp = findViewById(R.id.etTel);
-
-        final UserModel userModel = new UserModel(condition1,null);
-
-        if (TextUtils.isEmpty(condition1) || TextUtils.isEmpty(condition2) ) {
-
-            Toast.makeText(ConnectActivity.this, "Please, fill all fields !", Toast.LENGTH_SHORT).show();
-        }
-        else if(mdp.length() < 6) {
-
-            Toast.makeText(ConnectActivity.this, "Password 6 character min.", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        String tel = mdp.getText().toString();
 
 
-            mAuth.createUserWithEmailAndPassword(condition1, condition2).addOnCompleteListener(ConnectActivity.this, new OnCompleteListener<AuthResult>() {
+        final String nameValue = name.getText().toString();
+        final String prenomValue = entreprise.getText().toString();
 
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
+        UserSingleton userSingleton = UserSingleton.getInstance();
+        userSingleton.setName(nameValue);
+        userSingleton.setEntreprise(prenomValue);
+        userSingleton.setTel(tel);
 
-                    if (!task.isSuccessful()) {
-
-                        Toast.makeText(ConnectActivity.this, "Fail", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+        Intent intent = new Intent(ConnectActivity.this, MapsActivity.class);
+        startActivity(intent);
+        finish();
 
 
-                        final String nameValue = name.getText().toString();
-                        final String prenomValue = entreprise.getText().toString();
-                        final String id = mAuth.getCurrentUser().getUid();
-
-                        mRef = mFirebaseDatabase.getReference("Profil").child(id);
-                        final UserModel userModel = new UserModel(condition1,condition2);
-
-                        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-                        final String userID = mCurrentUser.getUid();
-                        mRef = FirebaseDatabase.getInstance().getReference("User");
-                        mRef.child(userID).child("Profil").child("id").setValue(userID);
-                        mRef.child(userID).child("Profil").child("nom").setValue(nameValue);
-                        mRef.child(userID).child("Profil").child("entreprise").setValue(prenomValue);
-
-                        Intent intent = new Intent(ConnectActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-
-                    }
-
-                }
-            });
-        }
     }
-
-
-
 
     /*
     -----------------------------------AvatarMethod-------------------------------------------------
@@ -232,8 +180,8 @@ public class ConnectActivity extends AppCompatActivity {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(ConnectActivity.this);
         builderSingle.setTitle("Choisissez une option :");
 
-        final String [] items = new String[] {"Gallerie", "Appareil photo"};
-        final Integer[] icons = new Integer[] {R.drawable.gallery, R.drawable.camera_moto_icon};
+        final String[] items = new String[]{"Gallerie", "Appareil photo"};
+        final Integer[] icons = new Integer[]{R.drawable.gallery, R.drawable.camera_moto_icon};
         ListAdapter adapter = new ArrayAdapterWithIcon(ConnectActivity.this, items, icons);
 
         builderSingle.setNegativeButton(
@@ -271,13 +219,12 @@ public class ConnectActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode) {
+        switch (requestCode) {
             case SELECT_IMAGE:
-                if(resultCode == RESULT_OK ) {
+                if (resultCode == RESULT_OK) {
                     Uri selectedImage = data.getData();
                     mPhotoURI = selectedImage;
                     Glide.with(ConnectActivity.this).load(mPhotoURI).into(profile);
@@ -286,7 +233,7 @@ public class ConnectActivity extends AppCompatActivity {
                 }
                 break;
             case REQUEST_TAKE_PHOTO:
-                if(resultCode == RESULT_OK ) {
+                if (resultCode == RESULT_OK) {
                     Glide.with(ConnectActivity.this).load(mPhotoURI).into(profile);
                     //Glide.with(getApplicationContext()).load(mPhotoURI).apply(RequestOptions.circleCropTransform()).into(profile);
                 }
@@ -294,7 +241,6 @@ public class ConnectActivity extends AppCompatActivity {
         }
 
     }
-
 
 
 }
