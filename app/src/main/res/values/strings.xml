@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">WinStateApp</string>
+    <string name="need_camera">L\'application WildQuizz a besoin d\'utiliser la caméra.</string>
+    <string name="need_storage">L\'application WildQuizz a besoin d\'accéder au Stockage.</string>
+    <string name="registration_success">Inscription réussite</string>
+    <string name="registration_impossible">Impossible de s\'inscrire, veuillez réessayer ultérieurement</string>
+    <string name="fields_required">Veuillez renseigner les champs obligatoires</string>
+    <string name="password_differents">Vous n\'avez pas renseigné le même mot de passe</string>
+    <string name="pass_numberletter">Le mot de passe doit contenir au moins 6 caractères</string>
+    <string name="login">Email</string>
+    <string name="password">Mot De Passe</string>
+    <string name="identifiant">Identifiant</string>
+    <string name="mot_de_passe">Mot De Passe</string>
+    <string name="cr_er_un_compte">Créer un compte</string>
     <string name="title_activity_maps">Map</string>
 </resources>

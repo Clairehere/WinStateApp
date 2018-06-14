@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         String LINK = "http://clips.vorwaerts-gmbh.de/VfE_html5.mp4";
         VideoView mVideoView  = (VideoView) findViewById(R.id.videoView);
         MediaController mc = new MediaController(this);
@@ -33,5 +34,6 @@ public class MainActivity extends AppCompatActivity {
         mVideoView.start();
 
         Uri uriYouTube = Uri.parse(savedInstanceState.getString("https://youtu.be/CP_2T9oTyBc"));
+
     }
 }
