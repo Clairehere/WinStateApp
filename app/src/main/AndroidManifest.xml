@@ -36,7 +36,12 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".MainActivity"></activity>
+
+        <activity android:name=".MainActivity">
+
+
+        </activity>
+
         <activity android:name=".ConnectActivity">
 
         </activity>
@@ -58,10 +63,15 @@
             android:label="@string/title_activity_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
+        <activity android:name=".ConnectActivity"/>
+
+        </activity>
+
 
         <meta-data
             android:name="preloaded_fonts"
@@ -69,6 +79,7 @@
 
         <activity android:name=".AddArticleActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>
