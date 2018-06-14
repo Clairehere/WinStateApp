@@ -201,10 +201,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mEvent.add(new VideoModel("Le sport rend heureux, c’est mesuré !",
                 "Une étude portant sur plus de 500 000 personnes publiée dans leJournal of\n" +"Happiness Studies, a découvert quela pratique d’une activité physique\n" +
                 "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
-                "www.youtube.com", "www.google.com", "journaliste 1", 43.5911392, 1.4434542999999849, 0));
-        mEvent.add(new VideoModel("Test2", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com","www.google.com", "journaliste 1", 43.4811392, 1.4434542999999849, 0));
-        mEvent.add(new VideoModel("Test3", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com","www.google.com", "journaliste 1", 43.3711392, 1.4434542999999849, 0));
-        mEvent.add(new VideoModel("Test4", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com","www.google.com", "journaliste 1", 43.2611392, 1.4434542999999849, 0));
+                "www.youtube.com", "www.google.com", 43.5911392, 1.4434542999999849,0));
 
         for (int i = 0; i < mEvent.size(); i++) {
 
