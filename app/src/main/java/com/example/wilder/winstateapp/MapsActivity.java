@@ -14,7 +14,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -28,7 +27,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 

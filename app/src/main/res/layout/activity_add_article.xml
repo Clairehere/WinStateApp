@@ -19,7 +19,7 @@
         android:ems="10"
         android:includeFontPadding="false"
         android:inputType="textPersonName"
-        android:text="Nom de votre article"
+        android:hint="Nom de votre article"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Description"
+        android:hint="Description"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
-        android:text="Ajouter un article"
+        android:hint="ajouter un article"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:fontFamily="@font/montserrat"
@@ -67,7 +67,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:text="Date"
+        android:hint="Date"
         android:textColor="@android:color/black"
         app:fontFamily="@font/montserrat"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,6 +87,32 @@
         app:layout_constraintTop_toBottomOf="@+id/et_description" />
 
     <Button
+        android:id="@+id/camera_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Enregistrez votre vidéo"
+        app:layout_constraintBottom_toBottomOf="@+id/videoView2"
+        app:layout_constraintTop_toTopOf="@+id/videoView2"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/lien_article"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:hint="Lien de l'article"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoView2" />
+
+    <Button
         android:id="@+id/btn_add"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -94,10 +120,10 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/winnews"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoView2" />
+        app:layout_constraintTop_toBottomOf="@+id/lien_article" />
 
 </android.support.constraint.ConstraintLayout>
