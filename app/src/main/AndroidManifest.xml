@@ -35,7 +35,12 @@
         </provider>
 
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".ConnectActivity"></activity>
+        <activity android:name=".ConnectActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -54,7 +59,9 @@
             android:label="@string/title_activity_maps">
 
 
+
         </activity>
+
 
         <meta-data
             android:name="preloaded_fonts"
@@ -62,10 +69,7 @@
 
         <activity android:name=".AddArticleActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
     </application>

@@ -27,6 +27,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.support.v7.widget.AppCompatImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.joaquimley.faboptions.FabOptions;
 import com.telenav.expandablepager.ExpandablePager;
 import com.telenav.expandablepager.listener.OnSliderStateChangeListener;
 
@@ -62,6 +64,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     ArrayList<VideoModel> mEvent = new ArrayList<>();
     ArrayList<Marker> mEventMarker = new ArrayList<>();
     private GoogleMap mMap;
+
+
 
     // Liste
     int duration = 200;
@@ -82,6 +86,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+
 
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setDownsampleEnabled(true)
@@ -306,7 +312,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 popup.setView(viewpop);
                 final AlertDialog dialog = popup.create();
 
-                ImageView videoArticle = viewpop.findViewById(R.id.article_video);
+               // ImageView videoArticle = viewpop.findViewById(R.id.article_video);
                 TextView titreArticle = viewpop.findViewById(R.id.article_titlre);
                 TextView resumeArticle = viewpop.findViewById(R.id.article_resume);
                 TextView lienArticle = viewpop.findViewById(R.id.article_lien_web);
