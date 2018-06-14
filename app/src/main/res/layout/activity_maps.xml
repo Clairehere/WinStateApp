@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,6 +30,7 @@
         map:backgroundTint="@color/bleuWin"
         map:layout_constraintBottom_toBottomOf="parent"
         map:layout_constraintEnd_toEndOf="parent" />
+
 
     <com.telenav.expandablepager.ExpandablePager
         android:id="@+id/container"
