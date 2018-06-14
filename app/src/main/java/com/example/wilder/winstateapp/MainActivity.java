@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         TagsSetRef.setValue("nom");*/
 
 
-        String LINK = "http://clips.vorwaerts-gmbh.de/VfE_html5.mp4";
+       /* String LINK = "http://clips.vorwaerts-gmbh.de/VfE_html5.mp4";
         VideoView mVideoView  = (VideoView) findViewById(R.id.videoView);
         MediaController mc = new MediaController(this);
         mc.setAnchorView(mVideoView);
@@ -92,9 +92,9 @@ public class MainActivity extends AppCompatActivity {
         Uri video = Uri.parse(LINK);
         mVideoView.setMediaController(mc);
         mVideoView.setVideoURI(video);
-        mVideoView.start();
+        mVideoView.start();*/
 
-        Uri uriYouTube = Uri.parse(savedInstanceState.getString("https://youtu.be/CP_2T9oTyBc"));
+//        Uri uriYouTube = Uri.parse(savedInstanceState.getString("https://youtu.be/CP_2T9oTyBc"));
 
     }
         final List<Book> myList = new ArrayList<>(list);
@@ -123,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
                 toggleContent(page, state, 0);
             }
         });
+
+        // Liste Principale
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.book_list);
         mRecyclerView.setHasFixedSize(true);

@@ -1,8 +1,10 @@
 package com.example.wilder.winstateapp;
 
 import android.Manifest;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,8 +17,11 @@ import android.os.CountDownTimer;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentContainer;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AlertDialog;
+import android.text.Layout;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +44,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.telenav.expandablepager.ExpandablePager;
 
 import java.util.ArrayList;
 
@@ -52,6 +58,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     ArrayList<Marker> mEventMarker = new ArrayList<>();
     private GoogleMap mMap;
 
+    // Liste
+    int duration = 200;
+    boolean two = false;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +75,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(MapsActivity.this);
         askLocationPermission();
+
+
 
     }
 
@@ -262,6 +276,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(drawableName, "drawable", getPackageName()));
         return Bitmap.createScaledBitmap(imageBitmap, width, height, false);
     }
+
+    // Liste
+
+
+
+
+
+
 
 }
 
