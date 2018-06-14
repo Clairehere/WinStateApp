@@ -282,7 +282,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 "Une étude portant sur plus de 500 000 personnes publiée dans leJournal of\n" +"Happiness Studies, a découvert quela pratique d’une activité physique\n" +
                 "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
                 "https://www.youtube.com/watch?v=nc7Z3EBMevg", "https://www.pepsnews.com/combien-de-minutes-de-sport-pour-etre-heureux/",
-                43.5911392, 1.4434542999999849,0));
+                43.5923392, 1.4434542999999849,0));
 
         mEvent.add(new VideoModel("Une IA contre le cancer",
                 "Une équipe de chercheurs allemands, américains et français a créé un système " +
@@ -303,7 +303,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mEvent.add(new VideoModel("L’économie est plus rentable c’est prouvé !",
                 "Une étude portant sur plus de 500 000 personnes publiée dans leJournal of\n" +"Happiness Studies, a découvert quela pratique d’une activité physique\n" +
                         "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
-                "www.youtube.com", "https://www.tdg.ch/savoirs/environnement/choisir-economie-verte-rentable/story/30129048", 43.5911392, 1.4434542999999849,0));
+                "www.youtube.com", "https://www.tdg.ch/savoirs/environnement/choisir-economie-verte-rentable/story/30129048", 43.5201392, 1.4434542999999849,0));
 
         mEvent.add(new VideoModel("Une ecole de Journalisme fait peau neuve à Toulouse", "C’est un ancien eleve d’une école de Journalisme qui a " +
                 "permis l’Institut Supérieur de Journalisme de Toulouse (ISJT) de ne pas mettre la clé " +
