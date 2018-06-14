@@ -59,6 +59,7 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    UserSingleton recieveArticle = UserSingleton.getInstance();
     Location mLastLocation = null;
     Location mLocationUser;
     FusedLocationProviderClient mFusedLocationClient;
@@ -275,7 +276,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mEvent.add(new VideoModel("Le sport rend heureux, c’est mesuré !",
                 "Une étude portant sur plus de 500 000 personnes publiée dans leJournal of\n" +"Happiness Studies, a découvert quela pratique d’une activité physique\n" +
                 "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
-                "www.youtube.com", "www.google.com","Boby", 43.5911392, 1.4434542999999849,0));
+                "www.youtube.com", "www.google.com", 43.5911392, 1.4434542999999849,0));
+
+        mEvent.add(recieveArticle.getVideoModelsList().get(0));
 
         for (int i = 0; i < mEvent.size(); i++) {
 
@@ -311,23 +314,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 popup.setView(viewpop);
                 final AlertDialog dialog = popup.create();
 
-                UserSingleton recieveArticle = UserSingleton.getInstance();
-                mVideoTest.add(recieveArticle.getVideoModelsList().get(0));
-
                 VideoView videoArticle = viewpop.findViewById(R.id.article_video);
                 TextView titreArticle = viewpop.findViewById(R.id.article_titlre);
                 TextView resumeArticle = viewpop.findViewById(R.id.article_resume);
                 TextView lienArticle = viewpop.findViewById(R.id.article_lien_web);
 
-                videoArticle.setVideoURI(Uri.parse(mVideoTest.get(0)));
+                String markerIdProv = marker.getId();
+                String markerID[] = markerIdProv.split("m");
+                int markerId = Integer.parseInt(markerID[1]);
+
+                videoArticle.setVideoURI(Uri.parse(mEvent.get(markerId).getLinkVideo()));
 
                 videoArticle.setMediaController(new MediaController(MapsActivity.this));
                 videoArticle.requestFocus();
                 videoArticle.start();
-
-                String markerIdProv = marker.getId();
-                String markerID[] = markerIdProv.split("m");
-                int markerId = Integer.parseInt(markerID[1]);
 
                 titreArticle.setText(mEvent.get(markerId).getTitle());
                 resumeArticle.setText(mEvent.get(markerId).getDescription());

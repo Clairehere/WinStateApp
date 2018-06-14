@@ -1,7 +1,9 @@
 package com.example.wilder.winstateapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -17,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.google.android.gms.location.LocationListener;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +30,7 @@ import java.util.List;
 public class AddArticleActivity extends AppCompatActivity {
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
-    ArrayList<String> mVideo = new ArrayList<>();
+    ArrayList<VideoModel> mVideo = new ArrayList<>();
     Uri videoUri;
 
     @Override
@@ -78,10 +82,8 @@ public class AddArticleActivity extends AppCompatActivity {
                 String nameUser = sendArticle.getName();
 
                 mVideo.clear();
-
-                //mVideo.add(new VideoModel(name, description, uriString, lien, nameUser, date, 3.1,3.1, 0));
-
-                mVideo.add(uriString);
+                VideoModel article = new VideoModel(name, description, uriString, lien, 48.862725,2.287592000000018, 0);
+                mVideo.add(article);
                 sendArticle.setVideoModelsList(mVideo);
 
                 Intent intent = new Intent(AddArticleActivity.this, MapsActivity.class);

@@ -1,5 +1,7 @@
 package com.example.wilder.winstateapp;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -11,7 +13,7 @@ public class UserSingleton {
     private String entreprise;
     private String tel;
     private File image;
-    private ArrayList<String> videoModelsList;
+    private ArrayList<VideoModel> videoModelsList;
 
     public UserSingleton() {
     }
@@ -56,11 +58,11 @@ public class UserSingleton {
         this.image = image;
     }
 
-    public ArrayList<String> getVideoModelsList() {
+    public ArrayList<VideoModel> getVideoModelsList() {
         return videoModelsList;
     }
 
-    public void setVideoModelsList(ArrayList<String> videoModelsList) {
+    public void setVideoModelsList(ArrayList<VideoModel> videoModelsList) {
         this.videoModelsList = videoModelsList;
     }
 
