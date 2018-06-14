@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConnectActivity">
+    tools:context=".ConnectActivity"
+    android:background="@color/yellowWin">
 
 
     <RadioGroup
@@ -15,9 +16,10 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivProfile">
 
@@ -48,16 +50,18 @@
 
     <Button
         android:id="@+id/btInscript"
-        android:layout_width="143dp"
+        android:layout_width="600dp"
         android:layout_height="38dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-
-        android:layout_marginTop="8dp"
-        android:text="Inscription"
+            android:background="@drawable/button"
+        android:textColor="@color/yellowWin"
+        android:layout_marginTop="24dp"
+        android:text="Inscription / Connexion"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btCo" />
+        app:layout_constraintTop_toBottomOf="@+id/etTel" />
 
     <EditText
         android:id="@+id/etFirst"
@@ -131,22 +135,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_user" />
-
-    <Button
-        android:id="@+id/btCo"
-        android:layout_width="143dp"
-        android:layout_height="38dp"
-        android:layout_marginBottom="56dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-
-        android:layout_marginTop="8dp"
-        android:text="Connexion"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTel"
-        app:layout_constraintVertical_bias="0.175" />
 
 </android.support.constraint.ConstraintLayout>

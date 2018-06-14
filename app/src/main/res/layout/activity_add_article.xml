@@ -52,6 +52,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         android:hint="ajouter un article"
+        android:text="Ajouter un article"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:fontFamily="@font/montserrat"

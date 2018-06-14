@@ -93,6 +93,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
 
 
+        FloatingActionButton fabProfil = findViewById(R.id.fab_profil);
+        if(ConnectActivity.CONTRIBUTEUR){
+            fabProfil.setVisibility(View.VISIBLE);
+        }
+        fabProfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MapsActivity.this, ProfilActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setDownsampleEnabled(true)
@@ -283,7 +294,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
                 "www.youtube.com", "www.google.com", 43.5911392, 1.4434542999999849,0));
 
-        mEvent.add(recieveArticle.getVideoModelsList().get(0));
+
+
+        if(recieveArticle.getVideoModelsList()!=null){
+            mEvent.addAll(recieveArticle.getVideoModelsList());
+        }
 
         for (int i = 0; i < mEvent.size(); i++) {
 

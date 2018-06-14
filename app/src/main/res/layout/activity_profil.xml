@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfilActivity">
+    tools:context=".ProfilActivity"
+    android:background="@color/yellowWin">
 
     <TextView
         android:id="@+id/tv_title"
@@ -25,8 +26,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="126dp"
-        android:layout_height="118dp"
+        android:layout_width="102dp"
+        android:layout_height="72dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -58,46 +59,51 @@
     <TextView
         android:id="@+id/tv_entreprise"
         android:layout_width="wrap_content"
-        android:layout_height="21dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Entreprise"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:fontFamily="@font/montserrat"
-        app:layout_constraintEnd_toEndOf="@+id/tv_tel"
-        app:layout_constraintHorizontal_bias="0.421"
-        app:layout_constraintStart_toStartOf="@+id/tv_tel"
-        tools:layout_editor_absoluteY="245dp" />
-
-    <TextView
-        android:id="@+id/tv_tel"
-        android:layout_width="wrap_content"
-        android:layout_height="23dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="tél : 06.06.06.06.06"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:fontFamily="@font/montserrat"
-        app:layout_constraintEnd_toEndOf="@+id/tv_name"
-        app:layout_constraintStart_toStartOf="@+id/tv_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
-
-    <Button
-        android:id="@+id/btn_change"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:text="Modifier"
+        android:layout_marginTop="12dp"
+        android:text="Entreprise"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:fontFamily="@font/montserrat"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tel" />
+
+    <TextView
+        android:id="@+id/tv_tel"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="tél : 06.06.06.06.06"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+    <Button
+        android:id="@+id/btn_change"
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/button"
+        android:text="Modifier"
+        android:textColor="@color/yellowWin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_entreprise" />
 
@@ -113,6 +119,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Nouveau Nom et Prenom"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_change" />
@@ -129,6 +136,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Nouvelle entreprise"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_name" />
@@ -143,11 +151,41 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Nouvelle entreprise"
+        android:inputType="number"
+        android:maxLength="10"
+        android:text="Nouveau telephone"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_entreprise" />
+
+    <Button
+        android:id="@+id/btn_validate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/logowinvalidate"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_name" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_media_rew" />
 
 </android.support.constraint.ConstraintLayout>
