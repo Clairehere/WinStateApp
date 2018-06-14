@@ -1,5 +1,7 @@
 package com.example.wilder.winstateapp;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.File;
 import java.util.ArrayList;
 

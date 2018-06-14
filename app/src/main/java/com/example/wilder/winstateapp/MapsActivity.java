@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -26,11 +27,13 @@ import android.text.Layout;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.support.v7.widget.AppCompatImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.widget.VideoView;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -57,12 +60,14 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    UserSingleton recieveArticle = UserSingleton.getInstance();
     Location mLastLocation = null;
     Location mLocationUser;
     FusedLocationProviderClient mFusedLocationClient;
     boolean mIsWaitingForGoogleMap = false;
     ArrayList<VideoModel> mEvent = new ArrayList<>();
     ArrayList<Marker> mEventMarker = new ArrayList<>();
+    ArrayList<String> mVideoTest = new ArrayList<>();
     private GoogleMap mMap;
 
 
@@ -278,6 +283,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
                 "www.youtube.com", "www.google.com", 43.5911392, 1.4434542999999849,0));
 
+        mEvent.add(recieveArticle.getVideoModelsList().get(0));
+
         for (int i = 0; i < mEvent.size(); i++) {
 
             Marker eventMark = mMap.addMarker(new MarkerOptions()
@@ -312,7 +319,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 popup.setView(viewpop);
                 final AlertDialog dialog = popup.create();
 
-               // ImageView videoArticle = viewpop.findViewById(R.id.article_video);
+
+                VideoView videoArticle = viewpop.findViewById(R.id.article_video);
                 TextView titreArticle = viewpop.findViewById(R.id.article_titlre);
                 TextView resumeArticle = viewpop.findViewById(R.id.article_resume);
                 TextView lienArticle = viewpop.findViewById(R.id.article_lien_web);
@@ -320,6 +328,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 String markerIdProv = marker.getId();
                 String markerID[] = markerIdProv.split("m");
                 int markerId = Integer.parseInt(markerID[1]);
+
+                videoArticle.setVideoURI(Uri.parse(mEvent.get(markerId).getLinkVideo()));
+
+                videoArticle.setMediaController(new MediaController(MapsActivity.this));
+                videoArticle.requestFocus();
+                videoArticle.start();
 
                 titreArticle.setText(mEvent.get(markerId).getTitle());
                 resumeArticle.setText(mEvent.get(markerId).getDescription());
