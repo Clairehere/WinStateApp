@@ -1,256 +1,177 @@
 package com.example.wilder.winstateapp;
 
-import android.Manifest;
-import android.app.Activity;
+
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ConnectActivity extends AppCompatActivity {
 
-    static final int REQUEST_TAKE_PHOTO = 567;
-    private static final String TAG = "ConnectActivity";
-    private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 101;
-    private FirebaseDatabase mDatabase;
-    private DatabaseReference mDatabaseReference;
-    private FirebaseAuth mAuth;
-    private ImageView mAvatar;
-    private Uri mFileUri;
-    private boolean mIsOk;
-    private EditText mUsername;
-    private EditText mPassword;
-    private EditText mConfirmPassword;
-    private EditText mEmail;
-    private Button mButtonCreate;
-    private Button mButtonInscript;
+    //Photo
+    private Uri mUrlImage;
     private String mCurrentPhotoPath;
+    private Uri mPhotoURI;
+    private String mUid;
 
-    public static boolean checkAndRequestPermissions(final Activity context) {
-        int extstorePermission = ContextCompat.checkSelfPermission(context,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        int cameraPermission = ContextCompat.checkSelfPermission(context,
-                android.Manifest.permission.CAMERA);
-        List<String> listPermissionsNeeded = new ArrayList<>();
-        if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(android.Manifest.permission.CAMERA);
-        }
-        if (extstorePermission != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded
-                    .add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
-        if (!listPermissionsNeeded.isEmpty()) {
-            ActivityCompat.requestPermissions(context, listPermissionsNeeded
-                            .toArray(new String[listPermissionsNeeded.size()]),
-                    REQUEST_ID_MULTIPLE_PERMISSIONS);
-            return false;
-        }
-        return true;
-    }
+    //CONSTANT
+    static final int SELECT_IMAGE = 0;
+    private static final int REQUEST_TAKE_PHOTO = 11;
+    private static final String ID_PROFIL = "idprofil";
+
+    //Firebase
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mRef;
+    private FirebaseUser mCurrentUser;
+    private StorageReference mStorageRef;
+
+
+    //Widgets
+    private Button btInscript;
+    private EditText name;
+    private EditText prenom;
+    private ImageView profile;
+    private EditText mdp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
 
-        mDatabase = FirebaseDatabase.getInstance();
+        btInscript = findViewById(R.id.btInscript);
+        name = findViewById(R.id.etLast);
+        prenom = findViewById(R.id.etFirst);
+        profile = findViewById(R.id.ivProfile);
+        //mUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+
         mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        Intent register = getIntent();
 
-        //CLICK SUR L'IMAGE :
-        mAvatar = findViewById(R.id.image_first);
-        mAvatar.setOnClickListener(new View.OnClickListener() {
+
+        profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkAndRequestPermissions(ConnectActivity.this)) {
-                    dispatchTakePictureIntent();
-                }
+
+                showPickImageDialog();
+
+            }
+
+
+        });
+
+        btInscript.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                createAccount();
+
+
             }
         });
 
-        mUsername = findViewById(R.id.edit_username);
-        mPassword = findViewById(R.id.edit_pass);
-        mEmail = findViewById(R.id.edit_email2);
+    }
 
-        //CLICK SUR LE BOUTON CREER SON COMPTE :
-        mButtonCreate = findViewById(R.id.button_create);
-        mButtonInscript = findViewById(R.id.button_inscript);
-        mButtonCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final String userName = mUsername.getText().toString();
+    public void createAccount() {
 
-                String password = mPassword.getText().toString();
-                String confirmPassword = mConfirmPassword.getText().toString();
-                String email = mEmail.getText().toString();
+        final String condition1 = name.getText().toString();
+        final String condition2 = prenom.getText().toString();
+        mdp = findViewById(R.id.etTel);
+
+        final UserModel userModel = new UserModel(condition1,null);
+
+        if (TextUtils.isEmpty(condition1) || TextUtils.isEmpty(condition2) ) {
+
+            Toast.makeText(ConnectActivity.this, "Please, fill all fields !", Toast.LENGTH_SHORT).show();
+        }
+        else if(mdp.length() < 6) {
+
+            Toast.makeText(ConnectActivity.this, "Password 6 character min.", Toast.LENGTH_SHORT).show();
+        }
+        else {
 
 
+            mAuth.createUserWithEmailAndPassword(condition1, condition2).addOnCompleteListener(ConnectActivity.this, new OnCompleteListener<AuthResult>() {
 
-                if (email.matches("") || userName.matches("") || password.matches("") || confirmPassword.matches("")) {
-                    Toast.makeText(ConnectActivity.this, R.string.fields_required, Toast.LENGTH_SHORT).show();
-                } else {
-                    if (!password.equals(confirmPassword)) {
-                        Toast.makeText(ConnectActivity.this, R.string.password_differents, Toast.LENGTH_SHORT).show();
-                    }
-                    if (password.length() < 6 && confirmPassword.length() < 6) {
-                        Toast.makeText(ConnectActivity.this, R.string.pass_numberletter, Toast.LENGTH_SHORT).show();
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+
+                    if (!task.isSuccessful()) {
+
+                        Toast.makeText(ConnectActivity.this, "Fail", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(ConnectActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    final String id = mAuth.getCurrentUser().getUid();
-                                    //DATABASE :
-                                    mDatabaseReference = mDatabase.getReference("Users").child(id);
-                                    final UserModel userModel = new UserModel(userName, null);
 
-                                    if (mFileUri != null && !mFileUri.equals("")) {
-                                        StorageReference imageRef = FirebaseStorage.getInstance().getReference("Users").child(id).child("imageProfile.jpg");
-                                        imageRef.putFile(mFileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                            @Override
-                                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                Uri downloadUri = taskSnapshot.getDownloadUrl();
-                                                String avatarUrl = downloadUri.toString();
-                                                userModel.setAvatar(avatarUrl);
-                                                mDatabaseReference.setValue(userModel);
-                                                goToMenu();
-                                            }
-                                        });
-                                    }
-                                    else {
-                                        mDatabaseReference.setValue(userModel);
-                                        goToMenu();
-                                    }
+
+                        final String nameValue = name.getText().toString();
+                        final String prenomValue = prenom.getText().toString();
+                        final String id = mAuth.getCurrentUser().getUid();
+
+                        mRef = mFirebaseDatabase.getReference("Profil").child(id);
+                        final UserModel userModel = new UserModel(condition1,condition2);
+
+                        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+                        final String userID = mCurrentUser.getUid();
+                        mRef = FirebaseDatabase.getInstance().getReference("User");
+                        mRef.child(userID).child("Profil").child("id").setValue(userID);
+                        mRef.child(userID).child("Profil").child("nom").setValue(nameValue);
+                        mRef.child(userID).child("Profil").child("prenom").setValue(prenomValue);
 
 
 
-                                } else {
-                                    Toast.makeText(ConnectActivity.this, R.string.registration_impossible, Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+
+                        Intent intent = new Intent(ConnectActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+
                     }
+
                 }
-            }
-        });
-
-        mButtonInscript.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final String userName = mUsername.getText().toString();
-
-                String password = mPassword.getText().toString();
-                String confirmPassword = mConfirmPassword.getText().toString();
-                String email = mEmail.getText().toString();
-
-
-
-                if (email.matches("") || userName.matches("") || password.matches("") || confirmPassword.matches("")) {
-                    Toast.makeText(ConnectActivity.this, R.string.fields_required, Toast.LENGTH_SHORT).show();
-                } else {
-                    if (!password.equals(confirmPassword)) {
-                        Toast.makeText(ConnectActivity.this, R.string.password_differents, Toast.LENGTH_SHORT).show();
-                    }
-                    if (password.length() < 6 && confirmPassword.length() < 6) {
-                        Toast.makeText(ConnectActivity.this, R.string.pass_numberletter, Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(ConnectActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    final String id = mAuth.getCurrentUser().getUid();
-                                    //DATABASE :
-                                    mDatabaseReference = mDatabase.getReference("Users").child(id);
-                                    final UserModel userModel = new UserModel(userName, null);
-
-                                    if (mFileUri != null && !mFileUri.equals("")) {
-                                        StorageReference imageRef = FirebaseStorage.getInstance().getReference("Users").child(id).child("imageProfile.jpg");
-                                        imageRef.putFile(mFileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                            @Override
-                                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                Uri downloadUri = taskSnapshot.getDownloadUrl();
-                                                String avatarUrl = downloadUri.toString();
-                                                userModel.setAvatar(avatarUrl);
-                                                mDatabaseReference.setValue(userModel);
-                                                goToMenu();
-                                            }
-                                        });
-                                    }
-                                    else {
-                                        mDatabaseReference.setValue(userModel);
-                                        goToMenu();
-                                    }
-
-
-
-                                } else {
-                                    Toast.makeText(ConnectActivity.this, R.string.registration_impossible, Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-        });
-
-
+            });
+        }
     }
 
-    private void goToMenu(){
-        Toast.makeText(ConnectActivity.this, R.string.registration_success, Toast.LENGTH_SHORT).show();
-        Intent gotoMenu = new Intent(ConnectActivity.this, MainActivity.class);
-        ConnectActivity.this.startActivity(gotoMenu);
-    }
 
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
+
+
+    /*
+    -----------------------------------AvatarMethod-------------------------------------------------
+     */
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -265,51 +186,98 @@ public class ConnectActivity extends AppCompatActivity {
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                mFileUri = FileProvider.getUriForFile(this,
+                mPhotoURI = FileProvider.getUriForFile(this,
                         "com.example.wilder.winstateapp.fileprovider",
                         photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mFileUri);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mPhotoURI);
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
             }
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_ID_MULTIPLE_PERMISSIONS:
-                if (ContextCompat.checkSelfPermission(ConnectActivity.this,
-                        android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getApplicationContext(),
-                            R.string.need_camera, Toast.LENGTH_SHORT)
-                            .show();
-                } else if (ContextCompat.checkSelfPermission(ConnectActivity.this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getApplicationContext(),
-                            R.string.need_storage,
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    dispatchTakePictureIntent();
-                }
-                break;
-        }
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("ddMMyyy_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
     }
+
+    private void showPickImageDialog() {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(ConnectActivity.this);
+        builderSingle.setTitle("Choisissez une option :");
+
+        final String [] items = new String[] {"Gallerie", "Appareil photo"};
+        final Integer[] icons = new Integer[] {R.drawable.gallery, R.drawable.camera_moto_icon};
+        ListAdapter adapter = new ArrayAdapterWithIcon(ConnectActivity.this, items, icons);
+
+        builderSingle.setNegativeButton(
+                "Annuler",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builderSingle.setAdapter(
+                adapter,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                startActivityForResult(pickPhoto, SELECT_IMAGE);
+                                break;
+
+                            case 1:
+                                dispatchTakePictureIntent();
+                                break;
+                        }
+
+
+                    }
+
+                });
+        builderSingle.show();
+
+    }
+
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQUEST_TAKE_PHOTO:
-                try {
-                    if (resultCode == RESULT_OK) {
-                        Glide.with(getApplicationContext()).load(mFileUri).apply(RequestOptions.circleCropTransform()).into(mAvatar);
-                    }
+        switch(requestCode) {
+            case SELECT_IMAGE:
+                if(resultCode == RESULT_OK ) {
+                    Uri selectedImage = data.getData();
+                    mPhotoURI = selectedImage;
+                    Glide.with(ConnectActivity.this).load(mPhotoURI).into(profile);
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    // Glide.with(getApplicationContext()).load(mPhotoURI).apply(RequestOptions.circleCropTransform()).into(profile);
                 }
+                break;
+            case REQUEST_TAKE_PHOTO:
+                if(resultCode == RESULT_OK ) {
+                    Glide.with(ConnectActivity.this).load(mPhotoURI).into(profile);
+                    //Glide.with(getApplicationContext()).load(mPhotoURI).apply(RequestOptions.circleCropTransform()).into(profile);
+                }
+                break;
         }
+
     }
+
+
 
 }

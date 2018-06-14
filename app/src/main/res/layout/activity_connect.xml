@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteY="48dp" />
 
     <Button
-        android:id="@+id/button_inscript"
+        android:id="@+id/btInscript"
         android:layout_width="143dp"
         android:layout_height="38dp"
         android:layout_marginBottom="28dp"
@@ -29,10 +29,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_create" />
+        app:layout_constraintTop_toBottomOf="@+id/btCo" />
 
     <EditText
-        android:id="@+id/edit_username"
+        android:id="@+id/etFirst"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -48,10 +48,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_email2" />
+        app:layout_constraintTop_toBottomOf="@+id/etLast" />
 
     <EditText
-        android:id="@+id/edit_email2"
+        android:id="@+id/etLast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -70,7 +70,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edit_pass"
+        android:id="@+id/etTel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -86,11 +86,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_username" />
+        app:layout_constraintTop_toBottomOf="@+id/etFirst" />
 
 
     <ImageView
-        android:id="@+id/image_first"
+        android:id="@+id/ivProfile"
         android:layout_width="118dp"
         android:layout_height="103dp"
         android:layout_marginEnd="8dp"
@@ -103,7 +103,7 @@
         app:srcCompat="@drawable/logo_user" />
 
     <Button
-        android:id="@+id/button_create"
+        android:id="@+id/btCo"
         android:layout_width="143dp"
         android:layout_height="38dp"
         android:layout_marginBottom="56dp"
@@ -115,6 +115,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_pass" />
+        app:layout_constraintTop_toBottomOf="@+id/etTel" />
 
 </android.support.constraint.ConstraintLayout>
