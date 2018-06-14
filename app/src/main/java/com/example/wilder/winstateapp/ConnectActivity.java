@@ -13,11 +13,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -60,7 +61,7 @@ public class ConnectActivity extends AppCompatActivity {
     //Widgets
     private Button btInscript;
     private EditText name;
-    private EditText prenom;
+    private EditText entreprise;
     private ImageView profile;
     private EditText mdp;
 
@@ -70,11 +71,28 @@ public class ConnectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
 
-        //TODO: mettre tel en numero et limiter caractere
+        RadioGroup radioGroup = findViewById(R.id.radioGroup);
+        final RadioButton radioButtonLecteur = findViewById(R.id.rb_lecteur);
+        final RadioButton radioButtonContributeur = findViewById(R.id.rb_contributeur);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(radioButtonLecteur.isChecked()){
+                    name.setVisibility(View.GONE);
+                    entreprise.setVisibility(View.GONE);
+
+                }
+                if(radioButtonContributeur.isChecked()){
+                    name.setVisibility(View.VISIBLE);
+                    entreprise.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         btInscript = findViewById(R.id.btInscript);
         name = findViewById(R.id.etLast);
-        prenom = findViewById(R.id.etFirst);
+        entreprise = findViewById(R.id.etFirst);
         profile = findViewById(R.id.ivProfile);
         //mUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -112,7 +130,7 @@ public class ConnectActivity extends AppCompatActivity {
     public void createAccount() {
 
         final String condition1 = name.getText().toString();
-        final String condition2 = prenom.getText().toString();
+        final String condition2 = entreprise.getText().toString();
         mdp = findViewById(R.id.etTel);
 
         final UserModel userModel = new UserModel(condition1,null);
@@ -141,7 +159,7 @@ public class ConnectActivity extends AppCompatActivity {
 
 
                         final String nameValue = name.getText().toString();
-                        final String prenomValue = prenom.getText().toString();
+                        final String prenomValue = entreprise.getText().toString();
                         final String id = mAuth.getCurrentUser().getUid();
 
                         mRef = mFirebaseDatabase.getReference("Profil").child(id);
@@ -152,7 +170,7 @@ public class ConnectActivity extends AppCompatActivity {
                         mRef = FirebaseDatabase.getInstance().getReference("User");
                         mRef.child(userID).child("Profil").child("id").setValue(userID);
                         mRef.child(userID).child("Profil").child("nom").setValue(nameValue);
-                        mRef.child(userID).child("Profil").child("prenom").setValue(prenomValue);
+                        mRef.child(userID).child("Profil").child("entreprise").setValue(prenomValue);
 
                         Intent intent = new Intent(ConnectActivity.this, MainActivity.class);
                         startActivity(intent);
