@@ -16,7 +16,13 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -178,7 +184,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        MapStyleOptions mapFilter = MapStyleOptions.loadRawResourceStyle(MapsActivity.this, R.raw.map_style);
+        final MapStyleOptions mapFilter = MapStyleOptions.loadRawResourceStyle(MapsActivity.this, R.raw.map_style);
         googleMap.setMapStyle(mapFilter);
 
         if (mIsWaitingForGoogleMap) {
@@ -195,10 +201,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mEvent.add(new VideoModel("Le sport rend heureux, c’est mesuré !",
                 "Une étude portant sur plus de 500 000 personnes publiée dans leJournal of\n" +"Happiness Studies, a découvert quela pratique d’une activité physique\n" +
                 "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
-                "www.youtube.com", "journaliste 1", 43.5911392, 1.4434542999999849, 0));
-        mEvent.add(new VideoModel("Test2", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 43.4811392, 1.4434542999999849, 0));
-        mEvent.add(new VideoModel("Test3", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 43.3711392, 1.4434542999999849, 0));
-        mEvent.add(new VideoModel("Test4", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com", "journaliste 1", 43.2611392, 1.4434542999999849, 0));
+                "www.youtube.com", "www.google.com", "journaliste 1", 43.5911392, 1.4434542999999849, 0));
+        mEvent.add(new VideoModel("Test2", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com","www.google.com", "journaliste 1", 43.4811392, 1.4434542999999849, 0));
+        mEvent.add(new VideoModel("Test3", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com","www.google.com", "journaliste 1", 43.3711392, 1.4434542999999849, 0));
+        mEvent.add(new VideoModel("Test4", "Je suis le premier exemple que l'on peux trouver", "www.youtube.com","www.google.com", "journaliste 1", 43.2611392, 1.4434542999999849, 0));
 
         for (int i = 0; i < mEvent.size(); i++) {
 
@@ -226,8 +232,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onInfoWindowClick(Marker marker) {
 
-            Toast.makeText(MapsActivity.this, "Inflate Layout", Toast.LENGTH_SHORT).show();
+                //Pop up News
+                AlertDialog.Builder popup = new AlertDialog.Builder(MapsActivity.this);
+                LayoutInflater inflater = (LayoutInflater) MapsActivity.this
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View viewpop = inflater.inflate(R.layout.model_layout_article, null);
+                popup.setView(viewpop);
+                final AlertDialog dialog = popup.create();
 
+                ImageView videoArticle = viewpop.findViewById(R.id.article_video);
+                TextView titreArticle = viewpop.findViewById(R.id.article_titlre);
+                TextView resumeArticle = viewpop.findViewById(R.id.article_resume);
+                TextView lienArticle = viewpop.findViewById(R.id.article_lien_web);
+
+                String markerIdProv = marker.getId();
+                String markerID[] = markerIdProv.split("m");
+                int markerId = Integer.parseInt(markerID[1]);
+
+                titreArticle.setText(mEvent.get(markerId).getTitle());
+                resumeArticle.setText(mEvent.get(markerId).getDescription());
+                lienArticle.setText(mEvent.get(markerId).getLinkArticle());
+
+                dialog.show();
             marker.setIcon((BitmapDescriptorFactory.fromBitmap(resizeBitmap("winnews_jaune", widthDp, heightDp))));
 
             }

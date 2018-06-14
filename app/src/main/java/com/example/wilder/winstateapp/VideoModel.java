@@ -6,22 +6,26 @@ public class VideoModel {
     private String title;
     private String description;
     private String linkVideo;
+    private String LinkArticle;
     private String contributeur;
     double latitude;
     double longitude;
     int fakenew;
-
     //ArrayList<String> tagList;
 
-    public VideoModel(String title, String description, String linkVideo, String contributeur, double latitude, double longitude, int fakenew) {
+    public VideoModel(String title, String description, String linkVideo, String linkArticle, String contributeur, double latitude, double longitude, int fakenew) {
         this.title = title;
         this.description = description;
         this.linkVideo = linkVideo;
+        LinkArticle = linkArticle;
         this.contributeur = contributeur;
         this.latitude = latitude;
         this.longitude = longitude;
         this.fakenew = fakenew;
-        //this.tagList = tagList;
+    }
+
+    public VideoModel() {
+
     }
 
     public String getTitle() {
@@ -46,6 +50,14 @@ public class VideoModel {
 
     public void setLinkVideo(String linkVideo) {
         this.linkVideo = linkVideo;
+    }
+
+    public String getLinkArticle() {
+        return LinkArticle;
+    }
+
+    public void setLinkArticle(String linkArticle) {
+        LinkArticle = linkArticle;
     }
 
     public String getContributeur() {
