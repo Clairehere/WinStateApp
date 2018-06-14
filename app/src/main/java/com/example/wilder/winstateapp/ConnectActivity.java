@@ -70,6 +70,8 @@ public class ConnectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
 
+        //TODO: mettre tel en numero et limiter caractere
+
         btInscript = findViewById(R.id.btInscript);
         name = findViewById(R.id.etLast);
         prenom = findViewById(R.id.etFirst);
