@@ -32,9 +32,9 @@
 
     <VideoView
         android:id="@+id/videoView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:layout_weight="" />
+         />
 
     <TextView
         android:id="@+id/tv_description"
