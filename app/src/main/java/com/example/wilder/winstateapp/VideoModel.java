@@ -6,27 +6,30 @@ public class VideoModel {
     private String title;
     private String description;
     private String linkVideo;
+    private String linkArticle;
     private String contributeur;
     private String date;
-    int latitude;
-    int longitude;
+    double latitude;
+    double longitude;
     int fakenew;
+
     ArrayList<String> tagList;
 
-
-    public VideoModel(String title, String description, String linkVideo, String contributeur, String date, int latitude, int longitude, int fakenew, ArrayList<String> tagList) {
+    public VideoModel(String title, String description, String linkVideo, String contributeur, double latitude, double longitude, int fakenew) {
         this.title = title;
         this.description = description;
         this.linkVideo = linkVideo;
+        linkArticle = linkArticle;
         this.contributeur = contributeur;
         this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
         this.fakenew = fakenew;
-        this.tagList = tagList;
     }
 
-    public VideoModel(){}
+    public VideoModel() {
+
+    }
 
     public String getTitle() {
         return title;
@@ -52,6 +55,14 @@ public class VideoModel {
         this.linkVideo = linkVideo;
     }
 
+    public String getLinkArticle() {
+        return linkArticle;
+    }
+
+    public void setLinkArticle(String linkArticle) {
+        this.linkArticle = linkArticle;
+    }
+
     public String getContributeur() {
         return contributeur;
     }
@@ -68,19 +79,19 @@ public class VideoModel {
         this.date = date;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
@@ -92,6 +103,7 @@ public class VideoModel {
         this.fakenew = fakenew;
     }
 
+    /**
     public ArrayList<String> getTagList() {
         return tagList;
     }
@@ -99,4 +111,6 @@ public class VideoModel {
     public void setTagList(ArrayList<String> tagList) {
         this.tagList = tagList;
     }
+
+    */
 }
