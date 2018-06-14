@@ -1,9 +1,11 @@
 package com.example.wilder.winstateapp;
 
 import android.Manifest;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,8 +19,11 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentContainer;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AlertDialog;
+import android.text.Layout;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +32,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
@@ -41,8 +48,12 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.telenav.expandablepager.ExpandablePager;
+import com.telenav.expandablepager.listener.OnSliderStateChangeListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -54,10 +65,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     ArrayList<Marker> mEventMarker = new ArrayList<>();
     private GoogleMap mMap;
 
+    // Liste
+    int duration = 200;
+    boolean two = false;
+    private List<Book> list = Arrays.asList(
+            new Book("Crime and Punishment").setAuthor("Fyodor Dostoyevsky").setUrl("http://ecx.images-amazon.com/images/I/51M%2BDuxvjmL._SX311_BO1,204,203,200_.jpg").setDescription("Crime and Punishment (Russian: Преступлéние и наказáние, tr. Prestupleniye i nakazaniye; IPA: [prʲɪstʊˈplʲenʲɪɪ ɪ nəkɐˈzanʲɪɪ]) is a novel by the Russian author Fyodor Dostoyevsky. It was first published in the literary journal The Russian Messenger in twelve monthly installments during 1866. It was later published in a single volume. It is the second of Dostoyevsky's full-length novels following his return from 10 years of exile in Siberia. Crime and Punishment is considered the first great novel of his \"mature\" period of writing."),
+            new Book("The Brothers Karamazov").setAuthor("Fyodor Dostoyevsky").setUrl("http://ecx.images-amazon.com/images/I/51FIyYKsCXL._SX333_BO1,204,203,200_.jpg").setDescription("The Brothers Karamazov (Russian: Бра́тья Карама́зовы, Brat'ya Karamazovy, pronounced [ˈbratʲjə kərɐˈmazəvɨ]), also translated as The Karamazov Brothers, is the final novel by the Russian author Fyodor Dostoyevsky. Dostoyevsky spent nearly two years writing The Brothers Karamazov, which was published as a serial in The Russian Messenger and completed in November 1880. The author died less than four months after its publication."),
+            new Book("Demons").setAuthor("Fyodor Dostoyevsky").setUrl("http://ecx.images-amazon.com/images/I/41Q-p2N1neL._SX326_BO1,204,203,200_.jpg").setDescription("Demons (Russian: Бесы, Bésy) is an anti-nihilistic novel by Fyodor Dostoyevsky, first published in the journal The Russian Messenger in 1871-2. It is the third of the four great novels written by Dostoyevsky after his return from Siberian exile, the others being Crime and Punishment (1866), The Idiot (1869) and The Brothers Karamazov (1880). Demons is a social and political satire, a psychological drama, and large scale tragedy. Joyce Carol Oates has described it as \"Dostoevsky's most confused and violent novel, and his most satisfyingly 'tragic' work.\""),
+            new Book("Catch-22").setAuthor("Joseph Heller").setUrl("http://ecx.images-amazon.com/images/I/51kqbC3YKvL._SX322_BO1,204,203,200_.jpg").setDescription("Catch-22 is a satirical novel by the American author Joseph Heller. He began writing it in 1953; the novel was first published in 1961. It is frequently cited as one of the greatest literary works of the twentieth century. It uses a distinctive non-chronological third-person omniscient narration, describing events from the points of view of different characters. The separate storylines are out of sequence so that the timeline develops along with the plot."),
+            new Book("Animal Farm").setAuthor("George Orwell").setUrl("http://ecx.images-amazon.com/images/I/51EjU6rQjsL._SX318_BO1,204,203,200_.jpg").setDescription("Animal Farm is an allegorical and dystopian novella by George Orwell, first published in England on 17 August 1945. According to Orwell, the book reflects events leading up to the Russian Revolution of 1917 and then on into the Stalinist era of the Soviet Union. Orwell, a democratic socialist, was a critic of Joseph Stalin and hostile to Moscow-directed Stalinism, an attitude that was critically shaped by his experiences during the Spanish Civil War."),
+            new Book("To Kill a Mockingbird").setAuthor("Harper Lee").setUrl("http://ecx.images-amazon.com/images/I/51grMGCKivL._SX307_BO1,204,203,200_.jpg").setDescription("To Kill a Mockingbird is a novel by Harper Lee published in 1960. It was immediately successful, winning the Pulitzer Prize, and has become a classic of modern American literature. The plot and characters are loosely based on the author's observations of her family and neighbors, as well as on an event that occurred near her hometown in 1936, when she was 10 years old."),
+            new Book("Fahrenheit 451").setAuthor("Ray Bradbury").setUrl("http://ecx.images-amazon.com/images/I/41Cx8mY2UNL._SX324_BO1,204,203,200_.jpg").setDescription("Fahrenheit 451 is a dystopian novel by Ray Bradbury published in 1953. It is regarded as one of his best works. The novel presents a future American society where books are outlawed and \"firemen\" burn any that are found. The title refers to the temperature that Bradbury asserted to be the autoignition temperature of paper. (In reality, scientists place the autoignition temperature of paper anywhere from high 440 degrees Fahrenheit to some 30 degrees hotter, depending on the study and type of paper.)")
+    );
+    private ExpandablePager pager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                .setDownsampleEnabled(true)
+                .build();
+        Fresco.initialize(this, config);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -75,7 +107,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        final List<Book> myList = new ArrayList<>(list);
+
+        //use PageAdapter
+        final BookAdapter adapter = new BookAdapter(myList);
+        //or FragmentAdapter
+        //final BookFragmentAdapter adapter = new BookFragmentAdapter(getSupportFragmentManager(), myList);
+        //or FragmentStateAdapter
+        //final BookFragmentStateAdapter adapter = new BookFragmentStateAdapter(getSupportFragmentManager(), myList);
+
+        pager = (ExpandablePager) findViewById(R.id.container);
+        //pager.setAnimationDuration(duration);
+        //pager.setCollapsedHeight((int) getResources().getDimension(R.dimen.header_height));
+        //pager.setMode(ExpandablePager.MODE_REGULAR);
+        pager.setAdapter(adapter);
+        pager.setOnSliderStateChangeListener(new OnSliderStateChangeListener() {
+
+            @Override
+            public void onStateChanged(View page, int index, int state) {
+               // toggleContent(page, state, duration);
+            }
+
+            @Override
+            public void onPageChanged(View page, int index, int state) {
+               // toggleContent(page, state, 0);
+            }
+        });
+
     }
+
 
     /**
      * Permissions
@@ -273,6 +333,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(drawableName, "drawable", getPackageName()));
         return Bitmap.createScaledBitmap(imageBitmap, width, height, false);
     }
+
+
 
 }
 
