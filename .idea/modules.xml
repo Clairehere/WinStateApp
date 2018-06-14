@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WinStateApp.iml" filepath="$PROJECT_DIR$/WinStateApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/WinStateApp.iml" filepath="$PROJECT_DIR$/.idea/WinStateApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
