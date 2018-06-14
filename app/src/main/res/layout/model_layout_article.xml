@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <VideoView
         android:id="@+id/article_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="8dp"
         android:text="Une étude portant sur plus de 500 000 personnes publiée dans leJournal of
 Happiness Studies, a découvert quela pratique d’une activité physique
 durant seulement 10 minutes au courant de la semaine peut améliorer
@@ -68,7 +68,5 @@ considérablement les chances de se sentir heureux."
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/article_resume" />
-
-
 
 </android.support.constraint.ConstraintLayout>

@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -26,9 +27,12 @@ import android.text.Layout;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -61,6 +65,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     boolean mIsWaitingForGoogleMap = false;
     ArrayList<VideoModel> mEvent = new ArrayList<>();
     ArrayList<Marker> mEventMarker = new ArrayList<>();
+    ArrayList<String> mVideoTest = new ArrayList<>();
     private GoogleMap mMap;
 
     // Liste
@@ -270,7 +275,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mEvent.add(new VideoModel("Le sport rend heureux, c’est mesuré !",
                 "Une étude portant sur plus de 500 000 personnes publiée dans leJournal of\n" +"Happiness Studies, a découvert quela pratique d’une activité physique\n" +
                 "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
-                "www.youtube.com", "www.google.com", 43.5911392, 1.4434542999999849,0));
+                "www.youtube.com", "www.google.com","Boby", 43.5911392, 1.4434542999999849,0));
 
         for (int i = 0; i < mEvent.size(); i++) {
 
@@ -306,10 +311,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 popup.setView(viewpop);
                 final AlertDialog dialog = popup.create();
 
-                ImageView videoArticle = viewpop.findViewById(R.id.article_video);
+                UserSingleton recieveArticle = UserSingleton.getInstance();
+                mVideoTest.add(recieveArticle.getVideoModelsList().get(0));
+
+                VideoView videoArticle = viewpop.findViewById(R.id.article_video);
                 TextView titreArticle = viewpop.findViewById(R.id.article_titlre);
                 TextView resumeArticle = viewpop.findViewById(R.id.article_resume);
                 TextView lienArticle = viewpop.findViewById(R.id.article_lien_web);
+
+                videoArticle.setVideoURI(Uri.parse(mVideoTest.get(0)));
+
+                videoArticle.setMediaController(new MediaController(MapsActivity.this));
+                videoArticle.requestFocus();
+                videoArticle.start();
 
                 String markerIdProv = marker.getId();
                 String markerID[] = markerIdProv.split("m");

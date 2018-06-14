@@ -26,7 +26,8 @@ import java.util.List;
 public class AddArticleActivity extends AppCompatActivity {
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
-    boolean mPlayVideo = false;
+    ArrayList<String> mVideo = new ArrayList<>();
+    Uri videoUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class AddArticleActivity extends AppCompatActivity {
         TextView tvdate = findViewById(R.id.tv_date);
         Button btnAdd = findViewById(R.id.btn_add);
 
-        Date date = new Date();
+        final Date date = new Date();
         Date newDate = new Date(date.getTime() + (604800000L * 2) + (24 * 60 * 60));
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
         String stringdate = dt.format(newDate);
@@ -64,6 +65,28 @@ public class AddArticleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                final EditText etDescription = findViewById(R.id.et_description);
+                final EditText etLienArticle = findViewById(R.id.lien_article);
+                final EditText etName = findViewById(R.id.et_name);
+
+                String name = etName.getText().toString();
+                String description = etDescription.getText().toString();
+                String lien = etLienArticle.getText().toString();
+
+                UserSingleton sendArticle = UserSingleton.getInstance();
+                String uriString = videoUri.toString();
+                String nameUser = sendArticle.getName();
+
+                mVideo.clear();
+
+                //mVideo.add(new VideoModel(name, description, uriString, lien, nameUser, date, 3.1,3.1, 0));
+
+                mVideo.add(uriString);
+                sendArticle.setVideoModelsList(mVideo);
+
+                Intent intent = new Intent(AddArticleActivity.this, MapsActivity.class);
+                startActivity(intent);
+
             }
         });
 
@@ -84,7 +107,7 @@ public class AddArticleActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
 
-            Uri videoUri = intent.getData();
+            videoUri = intent.getData();
             mVideoView.setVideoURI(videoUri);
             Button camera = findViewById(R.id.camera_button);
             camera.setVisibility(View.GONE);
@@ -95,21 +118,6 @@ public class AddArticleActivity extends AppCompatActivity {
 
         }
 
-    }
-
-    public void Checksending (Uri videoUri, String date ) {
-
-        final EditText etName = findViewById(R.id.et_name);
-        final EditText etDescription = findViewById(R.id.et_description);
-        String name = etName.getText().toString();
-        String description = etDescription.getText().toString();
-
-        if ((name.isEmpty()) || (description.isEmpty()) || (date.isEmpty())) {
-
-            //TODO : envoie a firebase
-            Intent intent = new Intent(AddArticleActivity.this, MapsActivity.class);
-            startActivity(intent);
-        }
     }
 
 }

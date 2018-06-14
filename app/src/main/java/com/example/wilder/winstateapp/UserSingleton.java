@@ -11,7 +11,7 @@ public class UserSingleton {
     private String entreprise;
     private String tel;
     private File image;
-    private ArrayList<VideoModel> videoModelsList;
+    private ArrayList<String> videoModelsList;
 
     public UserSingleton() {
     }
@@ -56,11 +56,11 @@ public class UserSingleton {
         this.image = image;
     }
 
-    public ArrayList<VideoModel> getVideoModelsList() {
+    public ArrayList<String> getVideoModelsList() {
         return videoModelsList;
     }
 
-    public void setVideoModelsList(ArrayList<VideoModel> videoModelsList) {
+    public void setVideoModelsList(ArrayList<String> videoModelsList) {
         this.videoModelsList = videoModelsList;
     }
 
