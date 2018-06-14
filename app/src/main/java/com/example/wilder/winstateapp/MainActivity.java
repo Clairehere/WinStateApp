@@ -3,6 +3,7 @@ package com.example.wilder.winstateapp;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ProgressBar;
 import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
@@ -21,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         String LINK = "http://clips.vorwaerts-gmbh.de/VfE_html5.mp4";
         VideoView mVideoView  = (VideoView) findViewById(R.id.videoView);
         MediaController mc = new MediaController(this);
@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         mVideoView.setMediaController(mc);
         mVideoView.setVideoURI(video);
         mVideoView.start();
-
 
         Uri uriYouTube = Uri.parse(savedInstanceState.getString("https://youtu.be/CP_2T9oTyBc"));
     }
