@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wilder.winstateapp">
 
@@ -13,7 +12,6 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
-
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -34,16 +32,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-
-        <activity android:name=".MainActivity">
-
-
-
-        </activity>
-
-        <activity android:name=".ConnectActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".ConnectActivity"></activity>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -59,23 +49,22 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
-
-
-        </activity>
+            android:label="@string/title_activity_maps"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".AddArticleActivity"
+        <activity
+            android:name=".AddArticleActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".ProfilActivity"></activity>
     </application>
 
 </manifest>

@@ -154,9 +154,6 @@ public class ConnectActivity extends AppCompatActivity {
                         mRef.child(userID).child("Profil").child("nom").setValue(nameValue);
                         mRef.child(userID).child("Profil").child("prenom").setValue(prenomValue);
 
-
-
-
                         Intent intent = new Intent(ConnectActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
