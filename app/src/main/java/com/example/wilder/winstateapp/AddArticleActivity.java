@@ -1,5 +1,6 @@
 package com.example.wilder.winstateapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +35,9 @@ public class AddArticleActivity extends AppCompatActivity {
                 String name = etName.getText().toString();
                 String description = etDescription.getText().toString();
                 //TODO : envoie a firebase
+
+                Intent intent = new Intent(AddArticleActivity.this, MapsActivity.class);
+                startActivity(intent);
             }
         });
 
