@@ -22,8 +22,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import io.github.memfis19.annca.Annca;
-import io.github.memfis19.annca.internal.configuration.AnncaConfiguration;
 
 public class AddArticleActivity extends AppCompatActivity {
 
