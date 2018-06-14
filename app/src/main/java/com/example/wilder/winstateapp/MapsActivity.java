@@ -30,10 +30,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.support.v7.widget.AppCompatImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
-
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -50,6 +50,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.joaquimley.faboptions.FabOptions;
 import com.telenav.expandablepager.ExpandablePager;
 import com.telenav.expandablepager.listener.OnSliderStateChangeListener;
 
@@ -68,6 +69,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     ArrayList<Marker> mEventMarker = new ArrayList<>();
     ArrayList<String> mVideoTest = new ArrayList<>();
     private GoogleMap mMap;
+
+
 
     // Liste
     int duration = 200;
@@ -88,6 +91,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+
 
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setDownsampleEnabled(true)
@@ -313,6 +318,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 View viewpop = inflater.inflate(R.layout.model_layout_article, null);
                 popup.setView(viewpop);
                 final AlertDialog dialog = popup.create();
+
 
                 VideoView videoArticle = viewpop.findViewById(R.id.article_video);
                 TextView titreArticle = viewpop.findViewById(R.id.article_titlre);
