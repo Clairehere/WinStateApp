@@ -3,6 +3,7 @@
 
 
 
+
     <color name="colorPrimary">#0E3758</color>
     <color name="colorCell">#444444</color>
     <color name="colorPrimaryDark">#0B2C47</color>
@@ -18,4 +19,11 @@
     <color name="colorShade4">#1C6DB0</color>
     <color name="colorShade5">#1E78C2</color>
     <color name="colorShade6">#2183D4</color>
+
+ 
+    <color name="bleuWin">#1e3278</color>
+    <color name="yellowWin">#ffdc00</color>
+    <color name="greyWin">#ebf0f0</color>
+    <color name="white">#FFFFFF</color>
+
 </resources>
