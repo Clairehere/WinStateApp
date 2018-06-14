@@ -12,16 +12,12 @@
         android:name="android.hardware.camera"
         android:required="true" />
 
-
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-
 
     <application
         android:allowBackup="true"
@@ -40,17 +36,14 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+
         <activity android:name=".MainActivity">
 
 
         </activity>
 
         <activity android:name=".ConnectActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
 
         <!--
@@ -68,7 +61,10 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
@@ -80,6 +76,9 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".AddArticleActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
     </application>
 
