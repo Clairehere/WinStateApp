@@ -79,7 +79,11 @@ public class ConnectActivity extends AppCompatActivity {
         RadioGroup radioGroup = findViewById(R.id.radioGroup);
         final RadioButton radioButtonLecteur = findViewById(R.id.rb_lecteur);
         final RadioButton radioButtonContributeur = findViewById(R.id.rb_contributeur);
-
+        final ConstraintLayout cc = findViewById(R.id.cc);
+        btInscript = findViewById(R.id.btInscript);
+        name = findViewById(R.id.etLast);
+        entreprise = findViewById(R.id.etFirst);
+        profile = findViewById(R.id.ivProfile);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @SuppressLint("ResourceAsColor")
@@ -88,6 +92,7 @@ public class ConnectActivity extends AppCompatActivity {
                 if (radioButtonLecteur.isChecked()) {
                     name.setVisibility(View.GONE);
                     entreprise.setVisibility(View.GONE);
+                    cc.setBackgroundDrawable(ContextCompat.getDrawable(ConnectActivity.this, R.drawable.backgroungbleu));
 
 
                 }
@@ -95,15 +100,12 @@ public class ConnectActivity extends AppCompatActivity {
                     name.setVisibility(View.VISIBLE);
                     entreprise.setVisibility(View.VISIBLE);
                     CONTRIBUTEUR = true;
-
+                    cc.setBackgroundDrawable(ContextCompat.getDrawable(ConnectActivity.this, R.drawable.backgroungyellow));
                 }
             }
         });
 
-        btInscript = findViewById(R.id.btInscript);
-        name = findViewById(R.id.etLast);
-        entreprise = findViewById(R.id.etFirst);
-        profile = findViewById(R.id.ivProfile);
+
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
