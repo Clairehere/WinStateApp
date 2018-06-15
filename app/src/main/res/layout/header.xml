@@ -31,14 +31,6 @@
             android:textSize="20sp"
             app:fontFamily="@font/montserrat" />
 
-        <TextView
-            android:id="@+id/header_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fyodor Dostoyevsky"
-            android:textColor="@color/yellowWin"
-            android:textSize="18sp"
-            app:fontFamily="@font/montserrat" />
     </LinearLayout>
 
     <ImageView

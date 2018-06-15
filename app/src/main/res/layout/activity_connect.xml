@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ConnectActivity"
-    android:background="@color/yellowWin">
+    android:id="@+id/cc"
+    android:background="@color/yellowWin"
+    >
+
 
 
     <RadioGroup
@@ -39,14 +42,7 @@
             android:text="Contributeur" />
     </RadioGroup>
 
-    <ImageView
-        android:id="@+id/iv_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
 
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="48dp" />
 
     <Button
         android:id="@+id/btInscript"
@@ -70,7 +66,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/holo_orange_dark"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="Entreprise"
@@ -90,7 +85,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:backgroundTint="@android:color/holo_orange_dark"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="Nom et Prénom"
@@ -110,7 +104,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/holo_orange_dark"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="Téléphone"
@@ -135,5 +128,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_user" />
+
+
 
 </android.support.constraint.ConstraintLayout>

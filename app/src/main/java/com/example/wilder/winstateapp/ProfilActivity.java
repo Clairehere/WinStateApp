@@ -29,14 +29,8 @@ public class ProfilActivity extends AppCompatActivity {
         tv_entreprise.setText("Entreprise : "+userSingleton.getEntreprise());
         tv_tel.setText("Tel : " +userSingleton.getTel());
 
-        FloatingActionButton fabBack = findViewById(R.id.fab_profil);
-        fabBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProfilActivity.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
+
+
         btnChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -18,8 +18,8 @@ import java.util.regex.Pattern;
 import com.telenav.expandablepager.adapter.ExpandablePagerAdapter;
 //import com.telenav.expandableviewpager.R;
 
-public class BookAdapter extends ExpandablePagerAdapter<Book> {
-    public BookAdapter(List<Book> items) {
+public class BookAdapter extends ExpandablePagerAdapter<VideoModel> {
+    public BookAdapter(List<VideoModel> items) {
         super(items);
     }
 
@@ -29,9 +29,9 @@ public class BookAdapter extends ExpandablePagerAdapter<Book> {
         rootView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         ((TextView) rootView.findViewById(R.id.text)).setText(items.get(position).getDescription());
         ((TextView) rootView.findViewById(R.id.header_title)).setText(items.get(position).getTitle());
-        ((TextView) rootView.findViewById(R.id.header_subtitle)).setText(items.get(position).getAuthor());
-        ((SimpleDraweeView) rootView.findViewById(R.id.header_img)).setImageURI(Uri.parse(items.get(position).getUrl()));
-        if (rootView.findViewById(R.id.cell_img) != null)
+       // ((TextView) rootView.findViewById(R.id.header_subtitle)).setText(items.get(position).getAuthor());
+        /*((SimpleDraweeView) rootView.findViewById(R.id.header_img)).setImageURI(Uri.parse(items.get(position).getUrl()));
+       if (rootView.findViewById(R.id.cell_img) != null)
             ((SimpleDraweeView) rootView.findViewById(R.id.cell_img)).setImageURI(Uri.parse(items.get(position).getUrl()));
 
         TextView rating = ((TextView) rootView.findViewById(R.id.page_rating));
@@ -41,7 +41,7 @@ public class BookAdapter extends ExpandablePagerAdapter<Book> {
         setSpan(reviews, "\\d+");
 
         TextView comments = ((TextView) rootView.findViewById(R.id.page_comments));
-        setSpan(comments, "\\d+,*\\d+");
+        setSpan(comments, "\\d+,*\\d+");*/
 
         return attach(container, rootView, position);
     }

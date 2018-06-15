@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
 
 //        Uri uriYouTube = Uri.parse(savedInstanceState.getString("https://youtu.be/CP_2T9oTyBc"));
 
-    }
-        final List<Book> myList = new ArrayList<>(list);
+    }/*
+        final List<VideoModel> myList = new ArrayList<>(list);
 
         //use PageAdapter
         final BookAdapter adapter = new BookAdapter(myList);
@@ -201,5 +201,5 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isLandscape() {
         return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-    }
+   */ }
 }

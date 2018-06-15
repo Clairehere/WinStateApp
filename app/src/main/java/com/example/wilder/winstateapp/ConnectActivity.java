@@ -1,13 +1,17 @@
 package com.example.wilder.winstateapp;
 
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -76,18 +80,22 @@ public class ConnectActivity extends AppCompatActivity {
         final RadioButton radioButtonLecteur = findViewById(R.id.rb_lecteur);
         final RadioButton radioButtonContributeur = findViewById(R.id.rb_contributeur);
 
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (radioButtonLecteur.isChecked()) {
                     name.setVisibility(View.GONE);
                     entreprise.setVisibility(View.GONE);
 
+
                 }
                 if (radioButtonContributeur.isChecked()) {
                     name.setVisibility(View.VISIBLE);
                     entreprise.setVisibility(View.VISIBLE);
                     CONTRIBUTEUR = true;
+
                 }
             }
         });
