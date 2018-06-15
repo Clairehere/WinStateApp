@@ -34,6 +34,7 @@ public class BookAdapter extends ExpandablePagerAdapter<VideoModel> {
         ((VideoView) rootView.findViewById(R.id.header_img)).setVideoPath(items.get(position).getLinkVideo());
 
 
+
        // ((TextView) rootView.findViewById(R.id.header_subtitle)).setText(items.get(position).getAuthor());
         /*((SimpleDraweeView) rootView.findViewById(R.id.header_img)).setImageURI(Uri.parse(items.get(position).getUrl()));
        if (rootView.findViewById(R.id.cell_img) != null)
