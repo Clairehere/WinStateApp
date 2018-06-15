@@ -292,44 +292,50 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         BitmapDescriptor iconWinNews = BitmapDescriptorFactory.fromResource(R.drawable.winnews);
         BitmapDescriptor iconWinNewsJaune = BitmapDescriptorFactory.fromResource(R.drawable.winnews_jaune);
 
+        Uri bonheur = Uri.parse("android.resource://" + getPackageName() + "/"+R.raw.le_sport_rend_heureux);
         mEvent.add(new VideoModel("Le sport rend heureux, c’est mesuré !",
                 "Une étude portant sur plus de 500 000 personnes publiée dans leJournal of\n" +"Happiness Studies, a découvert quela pratique d’une activité physique\n" +
                 "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
-                "https://www.youtube.com/watch?v=nc7Z3EBMevg", "https://www.pepsnews.com/combien-de-minutes-de-sport-pour-etre-heureux/",
+                bonheur.toString(), "https://www.pepsnews.com/combien-de-minutes-de-sport-pour-etre-heureux/",
                 43.5923392, 1.4434542999999849,0));
 
+        Uri cancer = Uri.parse("android.resource://" + getPackageName() + "/"+R.raw.une_ia_contre_le_cancer);
         mEvent.add(new VideoModel("Une IA contre le cancer",
                 "Une équipe de chercheurs allemands, américains et français a créé un système " +
                         "d’intelligence artificielle qui permet de distinguer les lésions cutanées " +
                         "dangereuses des lésions bénignes.Pour son apprentissage, la machine a " +
                         "assimilé plus de 100 000 images et lors d’une confrontation avec des " +
                         "dermatologues, cette intelligence artificielle a détecté 95% de mélanomes contre 86% au passé ",
-                "https://www.youtube.com/watch?v=CP_2T9oTyBc", "https://www.pepsnews.com/un-ordinateur-pour-detecter-plus-precisement-le-cancer-de-la-peau/", 43.556619, 1.4259531999999808,0));
+                cancer.toString(), "https://www.pepsnews.com/un-ordinateur-pour-detecter-plus-precisement-le-cancer-de-la-peau/", 43.556619, 1.4259531999999808,0));
 
+        Uri cargo = Uri.parse("android.resource://" + getPackageName() + "/"+R.raw.les_cargo_ecolos);
         mEvent.add(new VideoModel("Les cargos écolos 2.0",
                 "Dès la rentrée lasociété Néerlandaise Port-Linerlancera des cargos « verts »" +
                         " munis de batteries rechargeables par énergie solaire et renouvelable (éolienne). " +
                         "Ce sont une quinzaine de bateaux entre 50 et 110 mètres de long capables de " +
                         "transporter jusqu’à 280 conteneurs qui seront louéspour remplacer le" +
                         " dizaines de milliers de camions qui circulent chaque année.",
-                "www.youtube.com", "https://www.pepsnews.com/ecologie-des-cargos-electriques/", 43.62615900000001, 1.3775987000000214,0));
+                cargo.toString(), "https://www.pepsnews.com/ecologie-des-cargos-electriques/", 43.62615900000001, 1.3775987000000214,0));
 
+        Uri ecoVerte = Uri.parse("android.resource://" + getPackageName() + "/"+R.raw.economie_verte);
         mEvent.add(new VideoModel("L’économie est plus rentable c’est prouvé !",
                 "Une étude portant sur plus de 500 000 personnes publiée dans leJournal of\n" +"Happiness Studies, a découvert quela pratique d’une activité physique\n" +
                         "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
-                "www.youtube.com", "https://www.tdg.ch/savoirs/environnement/choisir-economie-verte-rentable/story/30129048", 43.5201392, 1.4434542999999849,0));
+                ecoVerte.toString(), "https://www.tdg.ch/savoirs/environnement/choisir-economie-verte-rentable/story/30129048", 43.5201392, 1.4434542999999849,0));
 
+        Uri isjt = Uri.parse("android.resource://" + getPackageName() + "/"+R.raw.ecole_de_journalisme);
         mEvent.add(new VideoModel("Une ecole de Journalisme fait peau neuve à Toulouse", "C’est un ancien eleve d’une école de Journalisme qui a " +
                 "permis l’Institut Supérieur de Journalisme de Toulouse (ISJT) de ne pas mettre la clé " +
                 "sous la porte. Le nom reste le même mais c’est bien la seule chose qui" +
                 " n’a pas été chambouler par Guillaume Truilhé, repreneur et directeur de" +
-                "l’établissement.","www.youtube.com", "https://france3-regions.blog.francetvinfo.fr/medias-midi-pyrenees/2015/08/18/une-nouvelle-ecole-de-journalisme-a-toulouse.html", 43.5683259, 1.3906465000000026,0));
+                "l’établissement.",isjt.toString(), "https://france3-regions.blog.francetvinfo.fr/medias-midi-pyrenees/2015/08/18/une-nouvelle-ecole-de-journalisme-a-toulouse.html", 43.5683259, 1.3906465000000026,0));
 
+        Uri Coworking = Uri.parse("android.resource://" + getPackageName() + "/"+R.raw.oikos);
         mEvent.add(new VideoModel("Un espace de CoWorking en province levé 1,7 millions\n" +
                 "d’euros",
                 "Une étude portant sur plus de 500 000 personnes publiée dans leJournal of\n" +"Happiness Studies, a découvert quela pratique d’une activité physique\n" +
                         "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
-                "www.youtube.com", "http://www.alloweb.org/levee-de-fonds-coworking-laboikos-leve-1-7-million-deuros/", 43.5911392, 1.4434542999999849,0));
+                Coworking.toString(), "http://www.alloweb.org/levee-de-fonds-coworking-laboikos-leve-1-7-million-deuros/", 43.5911392, 1.4434542999999849,0));
 
         if (recieveArticle.getVideoModelsList() != null) {
             mEvent.addAll(recieveArticle.getVideoModelsList());
