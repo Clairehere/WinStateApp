@@ -1,11 +1,13 @@
 package com.example.wilder.winstateapp;
 
+import android.content.Context;
 import android.net.Uri;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -31,22 +33,12 @@ public class BookAdapter extends ExpandablePagerAdapter<VideoModel> {
         ((TextView) rootView.findViewById(R.id.text)).setText(items.get(position).getDescription());
         ((TextView) rootView.findViewById(R.id.header_title)).setText(items.get(position).getTitle());
         ((TextView) rootView.findViewById(R.id.textadress)).setText(items.get(position).getLinkArticle());
-        ((VideoView) rootView.findViewById(R.id.header_img)).setVideoPath(items.get(position).getLinkVideo());
+
+        VideoView miniatureArticle = rootView.findViewById(R.id.header_img);
+        miniatureArticle.setVideoURI(Uri.parse(items.get(position).getLinkVideo()));
+        miniatureArticle.seekTo(100);
 
 
-       // ((TextView) rootView.findViewById(R.id.header_subtitle)).setText(items.get(position).getAuthor());
-        /*((SimpleDraweeView) rootView.findViewById(R.id.header_img)).setImageURI(Uri.parse(items.get(position).getUrl()));
-       if (rootView.findViewById(R.id.cell_img) != null)
-            ((SimpleDraweeView) rootView.findViewById(R.id.cell_img)).setImageURI(Uri.parse(items.get(position).getUrl()));
-
-        TextView rating = ((TextView) rootView.findViewById(R.id.page_rating));
-        setSpan(rating, "\\d\\.\\d / \\d\\.\\d");
-
-        TextView reviews = ((TextView) rootView.findViewById(R.id.page_reviews));
-        setSpan(reviews, "\\d+");
-
-        TextView comments = ((TextView) rootView.findViewById(R.id.page_comments));
-        setSpan(comments, "\\d+,*\\d+");*/
 
         return attach(container, rootView, position);
     }
