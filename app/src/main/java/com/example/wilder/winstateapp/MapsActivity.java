@@ -53,8 +53,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.joaquimley.faboptions.FabOptions;
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
-import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 import com.telenav.expandablepager.ExpandablePager;
 import com.telenav.expandablepager.listener.OnSliderStateChangeListener;
 
@@ -73,10 +71,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     ArrayList<Marker> mEventMarker = new ArrayList<>();
     ArrayList<String> mVideoTest = new ArrayList<>();
     private GoogleMap mMap;
-
-
-
-
 
     // Liste
     int duration = 200;
@@ -97,74 +91,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
-
-        /** Partie menu Circle**/
-
-        //Image bouton Menu
-        ImageView iconMenu = new ImageView(this);
-        iconMenu.setImageDrawable(ContextCompat.getDrawable(getApplication(), R.drawable.entonnoir));
-
-        //creation bouton Menu
-        final com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton actionButton = new com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton.Builder(this)
-                .setContentView(iconMenu)
-                .build();
-
-        SubActionButton.Builder listeBuilder = new SubActionButton.Builder(this);
-
-        //Creation image sous menu
-        final ImageView social = new ImageView(this); // Create an icon
-        social.setImageDrawable(ContextCompat.getDrawable(getApplication(), R.drawable.backgroungbleu));
-        SubActionButton sabSocial = listeBuilder.setContentView(social).build();
-
-        final ImageView ecologiel = new ImageView(this); // Create an icon
-        ecologiel.setImageDrawable(ContextCompat.getDrawable(getApplication(), R.drawable.backgroungyellow));
-        SubActionButton sabecol = listeBuilder.setContentView(ecologiel).build();
-
-        final ImageView economie = new ImageView(this); // Create an icon
-        economie.setImageDrawable(ContextCompat.getDrawable(getApplication(), R.drawable.backgroungyellow));
-        SubActionButton sabecono = listeBuilder.setContentView(economie).build();
-
-        final ImageView technologie = new ImageView(this); // Create an icon
-        technologie.setImageDrawable(ContextCompat.getDrawable(getApplication(), R.drawable.backgroungyellow));
-        SubActionButton ecoTechno = listeBuilder.setContentView(technologie).build();
-        //envoit sous bouton au menu
-
-
-        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(MapsActivity.this)
-                .addSubActionView(sabSocial)
-                .addSubActionView(sabecol)
-                .addSubActionView(sabecono)
-                .addSubActionView(ecoTechno)
-                .attachTo(actionButton)
-                .build();
-
-        sabSocial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        sabecol.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        sabecono.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        ecoTechno.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
 
         FloatingActionButton fabProfil = findViewById(R.id.fab_profil);
         if(ConnectActivity.CONTRIBUTEUR){
@@ -299,7 +225,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     }
-
 
     /**
      * Permissions

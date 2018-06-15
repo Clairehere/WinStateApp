@@ -6,24 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ConnectActivity"
     android:id="@+id/cc"
-    android:background="@color/bleuWin"
+    android:background="@color/yellowWin"
     >
-
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="54dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/yellowWin"
-        app:layout_constraintBottom_toTopOf="@+id/etTel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivProfile" />
-
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -61,10 +45,10 @@
 
     <Button
         android:id="@+id/btInscript"
-        android:layout_width="600dp"
+        android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
             android:background="@drawable/button"
         android:textColor="@color/yellowWin"
         android:layout_marginTop="24dp"

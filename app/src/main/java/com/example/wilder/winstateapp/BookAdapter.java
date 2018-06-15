@@ -54,7 +54,6 @@ public class BookAdapter extends ExpandablePagerAdapter<VideoModel> {
             }
         });
 
-
         return attach(container, rootView, position);
     }
 
