@@ -33,7 +33,9 @@
         android:id="@+id/fab_profil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="100dp"
+        android:layout_marginBottom="70dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="70dp"
         android:clickable="true"
         android:visibility="invisible"
         map:srcCompat="@drawable/logo_user" />
