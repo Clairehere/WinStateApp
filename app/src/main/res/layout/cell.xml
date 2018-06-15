@@ -16,8 +16,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/colorHeader"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@color/bleuWin">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -33,8 +33,9 @@
                 android:layout_centerHorizontal="true"
                 android:fontFamily="sans-serif"
                 android:text="buy online"
-                android:textColor="@color/colorText"
-                android:textSize="20sp" />
+                android:textColor="@color/yellowWin"
+                android:textSize="20sp"
+                app:fontFamily="@font/montserrat" />
 
 
             <TextView
@@ -44,8 +45,9 @@
                 android:layout_centerHorizontal="true"
                 android:fontFamily="sans-serif"
                 android:text="Fyodor Dostoyevsky"
-                android:textColor="@color/colorText"
-                android:textSize="15sp" />
+                android:textColor="@color/yellowWin"
+                android:textSize="15sp"
+                app:fontFamily="@font/montserrat" />
         </LinearLayout>
 
         <ImageView
@@ -54,8 +56,8 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_margin="8dp"
-            android:tint="@color/colorText"
-            android:src="@drawable/camera_moto_icon" />
+            android:src="@drawable/camera_moto_icon"
+            android:tint="@color/yellowWin" />
     </RelativeLayout>
 
 </RelativeLayout>

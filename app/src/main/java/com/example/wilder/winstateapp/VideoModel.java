@@ -23,6 +23,8 @@ public class VideoModel {
         this.fakenew = fakenew;
     }
 
+
+
     public String getTitle() {
         return title;
     }
@@ -78,6 +80,7 @@ public class VideoModel {
     public void setFakenew(int fakenew) {
         this.fakenew = fakenew;
     }
+
 
     /**
     public ArrayList<String> getTagList() {
