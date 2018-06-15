@@ -5,8 +5,13 @@
     android:id="@+id/header_container"
     android:layout_width="match_parent"
     android:layout_height="@dimen/header_height"
-    android:background="@color/bleuWin"
+
     android:clipChildren="false">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/bleuWin" />
 
     <VideoView
         android:id="@+id/header_img"
@@ -33,14 +38,4 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/header_action"
-        android:layout_width="@dimen/header_button_size"
-        android:layout_height="@dimen/header_button_size"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="25dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/gallery"
-        android:tint="@color/yellowWin" />
 </RelativeLayout>

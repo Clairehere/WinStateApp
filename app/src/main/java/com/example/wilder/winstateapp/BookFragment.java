@@ -9,8 +9,10 @@ import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 //import com.telenav.demoapp.Book;
@@ -52,19 +54,10 @@ public class BookFragment extends Fragment {
         rootView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         ((TextView) rootView.findViewById(R.id.text)).setText(myBook.getDescription());
         ((TextView) rootView.findViewById(R.id.header_title)).setText(myBook.getTitle());
-       // ((TextView) rootView.findViewById(R.id.header_subtitle)).setText(myBook.getAuthor());
-        ((SimpleDraweeView) rootView.findViewById(R.id.header_img)).setImageURI(Uri.parse(myBook.getUrl()));
+
         if (rootView.findViewById(R.id.cell_img) != null)
             ((SimpleDraweeView) rootView.findViewById(R.id.cell_img)).setImageURI(Uri.parse(myBook.getUrl()));
 
-        TextView rating = ((TextView) rootView.findViewById(R.id.page_rating));
-        setSpan(rating, "\\d\\.\\d / \\d\\.\\d");
-
-        TextView reviews = ((TextView) rootView.findViewById(R.id.page_reviews));
-        setSpan(reviews, "\\d+");
-
-        TextView comments = ((TextView) rootView.findViewById(R.id.page_comments));
-        setSpan(comments, "\\d+,*\\d+");
         return rootView;
     }
 

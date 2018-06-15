@@ -1,11 +1,16 @@
 package com.example.wilder.winstateapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -24,42 +29,49 @@ public class BookAdapter extends ExpandablePagerAdapter<VideoModel> {
         super(items);
     }
 
+    boolean playVid = false;
+
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         final ViewGroup rootView = (ViewGroup) LayoutInflater.from(container.getContext()).inflate(R.layout.page, container, false);
         rootView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         ((TextView) rootView.findViewById(R.id.text)).setText(items.get(position).getDescription());
         ((TextView) rootView.findViewById(R.id.header_title)).setText(items.get(position).getTitle());
-        ((TextView) rootView.findViewById(R.id.textadress)).setText(items.get(position).getLinkArticle());
-        ((VideoView) rootView.findViewById(R.id.header_img)).setVideoPath(items.get(position).getLinkVideo());
 
+        TextView link = rootView.findViewById(R.id.textadress);
+        link.setText(items.get(position).getLinkArticle());
 
+        VideoView miniatureArticle = rootView.findViewById(R.id.header_img);
+        miniatureArticle.setVideoURI(Uri.parse(items.get(position).getLinkVideo()));
+        miniatureArticle.seekTo(100);
 
-       // ((TextView) rootView.findViewById(R.id.header_subtitle)).setText(items.get(position).getAuthor());
-        /*((SimpleDraweeView) rootView.findViewById(R.id.header_img)).setImageURI(Uri.parse(items.get(position).getUrl()));
-       if (rootView.findViewById(R.id.cell_img) != null)
-            ((SimpleDraweeView) rootView.findViewById(R.id.cell_img)).setImageURI(Uri.parse(items.get(position).getUrl()));
+        final VideoView bigArticle = rootView.findViewById(R.id.second_container);
+        bigArticle.setVideoURI(Uri.parse(items.get(position).getLinkVideo()));
+        bigArticle.seekTo(150);
+        bigArticle.setMediaController(new MediaController(rootView.getContext()));
+        bigArticle.requestFocus();
 
-        TextView rating = ((TextView) rootView.findViewById(R.id.page_rating));
-        setSpan(rating, "\\d\\.\\d / \\d\\.\\d");
+                if (playVid){
+                    bigArticle.pause();
+                    playVid=false;
+                } else {
+                    bigArticle.start();
+                    playVid = true;
+                }
 
-        TextView reviews = ((TextView) rootView.findViewById(R.id.page_reviews));
-        setSpan(reviews, "\\d+");
+            }
+        });
 
-        TextView comments = ((TextView) rootView.findViewById(R.id.page_comments));
-        setSpan(comments, "\\d+,*\\d+");*/
+        link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(items.get(position).getLinkArticle()));
+                rootView.getContext().startActivity(browserIntent);
+            }
+        });
+
 
         return attach(container, rootView, position);
     }
 
-    private void setSpan(TextView textView, String pattern) {
-        float relativeSize = 1.5f;
-        Pattern pat = Pattern.compile(pattern);
-        Matcher m = pat.matcher(textView.getText());
-        if (m.find()) {
-            SpannableString span = new SpannableString(textView.getText());
-            span.setSpan(new RelativeSizeSpan(relativeSize), 0, m.group(0).length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            textView.setText(span);
-        }
-    }
 }
