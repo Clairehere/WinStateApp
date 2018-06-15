@@ -105,7 +105,7 @@ public class AddArticleActivity extends AppCompatActivity {
                 if(rbTechno.isChecked()){
                     theme[0] = " Technologie";
                 }
-                //TODO envoyer singleton
+
             }
 
         });
@@ -132,7 +132,7 @@ public class AddArticleActivity extends AppCompatActivity {
                 longUser = sendArticle.getLongUser();
 
                 mVideo.clear();
-                VideoModel article = new VideoModel(name, description, uriString, lien, latUser,longUser, 0);
+                VideoModel article = new VideoModel(name, description, uriString, lien,theme[0], latUser,longUser, 0);
                 mVideo.add(article);
                 sendArticle.setVideoModelsList(mVideo);
 

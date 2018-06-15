@@ -296,7 +296,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mEvent.add(new VideoModel("Le sport rend heureux, c’est mesuré !",
                 "Une étude portant sur plus de 500 000 personnes publiée dans leJournal of\n" +"Happiness Studies, a découvert quela pratique d’une activité physique\n" +
                 "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
-                bonheur.toString(), "https://www.pepsnews.com/combien-de-minutes-de-sport-pour-etre-heureux/",
+                bonheur.toString(), "https://www.pepsnews.com/combien-de-minutes-de-sport-pour-etre-heureux/","social",
                 43.5923392, 1.4434542999999849,0));
 
         Uri cancer = Uri.parse("android.resource://" + getPackageName() + "/"+R.raw.une_ia_contre_le_cancer);
@@ -306,7 +306,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         "dangereuses des lésions bénignes.Pour son apprentissage, la machine a " +
                         "assimilé plus de 100 000 images et lors d’une confrontation avec des " +
                         "dermatologues, cette intelligence artificielle a détecté 95% de mélanomes contre 86% au passé ",
-                cancer.toString(), "https://www.pepsnews.com/un-ordinateur-pour-detecter-plus-precisement-le-cancer-de-la-peau/", 43.556619, 1.4259531999999808,0));
+                cancer.toString(), "https://www.pepsnews.com/un-ordinateur-pour-detecter-plus-precisement-le-cancer-de-la-peau/", "technologie", 43.556619, 1.4259531999999808,0));
 
         Uri cargo = Uri.parse("android.resource://" + getPackageName() + "/"+R.raw.les_cargo_ecolos);
         mEvent.add(new VideoModel("Les cargos écolos 2.0",
@@ -315,27 +315,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         "Ce sont une quinzaine de bateaux entre 50 et 110 mètres de long capables de " +
                         "transporter jusqu’à 280 conteneurs qui seront louéspour remplacer le" +
                         " dizaines de milliers de camions qui circulent chaque année.",
-                cargo.toString(), "https://www.pepsnews.com/ecologie-des-cargos-electriques/", 43.62615900000001, 1.3775987000000214,0));
+                cargo.toString(), "https://www.pepsnews.com/ecologie-des-cargos-electriques/", "technologie", 43.62615900000001, 1.3775987000000214,0));
 
         Uri ecoVerte = Uri.parse("android.resource://" + getPackageName() + "/"+R.raw.economie_verte);
         mEvent.add(new VideoModel("L’économie est plus rentable c’est prouvé !",
                 "Une étude portant sur plus de 500 000 personnes publiée dans leJournal of\n" +"Happiness Studies, a découvert quela pratique d’une activité physique\n" +
                         "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
-                ecoVerte.toString(), "https://www.tdg.ch/savoirs/environnement/choisir-economie-verte-rentable/story/30129048", 43.5201392, 1.4434542999999849,0));
+                ecoVerte.toString(), "https://www.tdg.ch/savoirs/environnement/choisir-economie-verte-rentable/story/30129048", "economie",43.5201392, 1.4434542999999849,0));
 
         Uri isjt = Uri.parse("android.resource://" + getPackageName() + "/"+R.raw.ecole_de_journalisme);
         mEvent.add(new VideoModel("Une ecole de Journalisme fait peau neuve à Toulouse", "C’est un ancien eleve d’une école de Journalisme qui a " +
                 "permis l’Institut Supérieur de Journalisme de Toulouse (ISJT) de ne pas mettre la clé " +
                 "sous la porte. Le nom reste le même mais c’est bien la seule chose qui" +
                 " n’a pas été chambouler par Guillaume Truilhé, repreneur et directeur de" +
-                "l’établissement.",isjt.toString(), "https://france3-regions.blog.francetvinfo.fr/medias-midi-pyrenees/2015/08/18/une-nouvelle-ecole-de-journalisme-a-toulouse.html", 43.5683259, 1.3906465000000026,0));
+                "l’établissement.",isjt.toString(), "https://france3-regions.blog.francetvinfo.fr/medias-midi-pyrenees/2015/08/18/une-nouvelle-ecole-de-journalisme-a-toulouse.html", "social",43.5683259, 1.3906465000000026,0));
 
         Uri Coworking = Uri.parse("android.resource://" + getPackageName() + "/"+R.raw.oikos);
         mEvent.add(new VideoModel("Un espace de CoWorking en province levé 1,7 millions\n" +
                 "d’euros",
                 "Une étude portant sur plus de 500 000 personnes publiée dans leJournal of\n" +"Happiness Studies, a découvert quela pratique d’une activité physique\n" +
                         "durant seulement 10 minutes au courant de la semaine peut améliorer\n" + "considérablement les chances de se sentir heureux.",
-                Coworking.toString(), "http://www.alloweb.org/levee-de-fonds-coworking-laboikos-leve-1-7-million-deuros/", 43.5911392, 1.4434542999999849,0));
+                Coworking.toString(), "http://www.alloweb.org/levee-de-fonds-coworking-laboikos-leve-1-7-million-deuros/", "social", 43.5911392, 1.4434542999999849,0));
 
         if (recieveArticle.getVideoModelsList() != null) {
             mEvent.addAll(recieveArticle.getVideoModelsList());
@@ -398,6 +398,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 TextView titreArticle = viewpop.findViewById(R.id.article_titlre);
                 TextView resumeArticle = viewpop.findViewById(R.id.article_resume);
                 TextView lienArticle = viewpop.findViewById(R.id.article_lien_web);
+                TextView themeArticle = viewpop.findViewById(R.id.article_theme);
 
                 String markerIdProv = marker.getId();
                 String markerID[] = markerIdProv.split("m");
@@ -413,6 +414,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 titreArticle.setText(mEvent.get(markerId).getTitle());
                 resumeArticle.setText(mEvent.get(markerId).getDescription());
                 lienArticle.setText(mEvent.get(markerId).getLinkArticle());
+                themeArticle.setText("Theme: " + mEvent.get(markerId).getTheme());
                 dialog.show();
 
             lienArticle.setOnClickListener(new View.OnClickListener() {
