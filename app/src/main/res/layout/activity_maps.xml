@@ -37,7 +37,7 @@
         android:layout_marginTop="16dp"
         android:clickable="true"
         android:visibility="gone"
-        map:srcCompat="@drawable/logo_user" />
+        map:srcCompat="@drawable/logo_useryellow" />
 
     <com.telenav.expandablepager.ExpandablePager
         android:id="@+id/container"
