@@ -45,26 +45,6 @@ public class BookAdapter extends ExpandablePagerAdapter<VideoModel> {
         miniatureArticle.setVideoURI(Uri.parse(items.get(position).getLinkVideo()));
         miniatureArticle.seekTo(100);
 
-        final VideoView bigArticle = rootView.findViewById(R.id.second_container);
-        bigArticle.setVideoURI(Uri.parse(items.get(position).getLinkVideo()));
-        bigArticle.seekTo(150);
-        bigArticle.setMediaController(new MediaController(rootView.getContext()));
-        bigArticle.requestFocus();
-
-        bigArticle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (playVid){
-                    bigArticle.pause();
-                    playVid=false;
-                } else {
-                    bigArticle.start();
-                    playVid = true;
-                }
-
-            }
-        });
 
         link.setOnClickListener(new View.OnClickListener() {
             @Override
