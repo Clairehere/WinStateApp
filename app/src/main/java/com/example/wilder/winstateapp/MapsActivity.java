@@ -3,6 +3,7 @@ package com.example.wilder.winstateapp;
 import android.Manifest;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -366,6 +367,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View viewpop = inflater.inflate(R.layout.model_layout_article, null);
                 popup.setView(viewpop);
+                popup.setNegativeButton("Lu", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+
+                popup.setPositiveButton("Fake News", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //TODO mettre en rouge ou invisible
+                    }
+                });
+
                 final AlertDialog dialog = popup.create();
 
                 VideoView videoArticle = viewpop.findViewById(R.id.article_video);
