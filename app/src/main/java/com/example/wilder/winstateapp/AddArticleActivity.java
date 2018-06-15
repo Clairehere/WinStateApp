@@ -88,6 +88,28 @@ public class AddArticleActivity extends AppCompatActivity {
             }
         });
 
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                if(rbSocial.isChecked()){
+                    theme[0] = "Social";
+                }
+                if(rbEcolo.isChecked()){
+                    theme[0] = "Ecologie";
+                }
+                if(rbEconomie.isChecked()){
+                    theme[0] = "Economie";
+
+                }
+                if(rbTechno.isChecked()){
+                    theme[0] = " Technologie";
+                }
+                //TODO envoyer singleton
+            }
+
+        });
+
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,28 +140,6 @@ public class AddArticleActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
-        });
-
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
-                if(rbSocial.isChecked()){
-                    theme[0] = "Social";
-                }
-                if(rbEcolo.isChecked()){
-                    theme[0] = "Ecologie";
-                }
-                if(rbEconomie.isChecked()){
-                    theme[0] = "Economie";
-
-                }
-                if(rbTechno.isChecked()){
-                    theme[0] = " Technologie";
-                }
-                //TODO envoyer singleton
-            }
-
         });
 
     }

@@ -292,9 +292,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final int widthDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, ressource.getDisplayMetrics());
         final int heightDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, ressource.getDisplayMetrics());
 
-        BitmapDescriptor iconWinNews = BitmapDescriptorFactory.fromResource(R.drawable.winnews);
-        BitmapDescriptor iconWinNewsJaune = BitmapDescriptorFactory.fromResource(R.drawable.winnews_jaune);
-
         Uri bonheur = Uri.parse("android.resource://" + getPackageName() + "/"+R.raw.le_sport_rend_heureux);
         mEvent.add(new VideoModel("Le sport rend heureux, c’est mesuré !",
                 "Une étude portant sur plus de 500 000 personnes publiée dans leJournal of\n" +"Happiness Studies, a découvert quela pratique d’une activité physique\n" +
@@ -368,7 +365,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
-            public void onInfoWindowClick(Marker marker) {
+            public void onInfoWindowClick(final Marker marker) {
 
                 //Pop up News
                 final AlertDialog.Builder popup = new AlertDialog.Builder(MapsActivity.this);
@@ -383,10 +380,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 });
 
+                marker.setIcon((BitmapDescriptorFactory.fromBitmap(resizeBitmap("winnews_jaune", widthDp, heightDp))));
+
 
                 popup.setPositiveButton("Fake News", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        marker.setIcon((BitmapDescriptorFactory.fromBitmap(resizeBitmap("marqueurrouge", widthDp, heightDp))));
 
                     }
                 });
