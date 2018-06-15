@@ -29,6 +29,9 @@ public class BookAdapter extends ExpandablePagerAdapter<VideoModel> {
         rootView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         ((TextView) rootView.findViewById(R.id.text)).setText(items.get(position).getDescription());
         ((TextView) rootView.findViewById(R.id.header_title)).setText(items.get(position).getTitle());
+        ((TextView) rootView.findViewById(R.id.textadress)).setText(items.get(position).getLinkArticle());
+
+
        // ((TextView) rootView.findViewById(R.id.header_subtitle)).setText(items.get(position).getAuthor());
         /*((SimpleDraweeView) rootView.findViewById(R.id.header_img)).setImageURI(Uri.parse(items.get(position).getUrl()));
        if (rootView.findViewById(R.id.cell_img) != null)

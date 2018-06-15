@@ -91,15 +91,12 @@
         tools:text="Crime and Punishment (Russian: Преступлéние и наказáние, tr. Prestupleniye i nakazaniye; IPA: [prʲɪstʊˈplʲenʲɪɪ ɪ nəkɐˈzanʲɪɪ]) is a novel by the Russian author Fyodor Dostoyevsky. It was first published in the literary journal The Russian Messenger in twelve monthly installments during 1866.[1] It was later published in a single volume. It is the second of Dostoyevsky's full-length novels following his return from 10 years of exile in Siberia. Crime and Punishment is considered the first great novel of his \'mature\' period of writing.[2]" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textadress"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/yellowWin"
-        android:paddingBottom="8dp"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:text="more info"
-        android:textAllCaps="true"
-        android:textColor="@color/bleuWin" />
+        android:padding="@dimen/activity_horizontal_margin"
+        android:textColor="@color/yellowWin"
+        android:textSize="15sp"
+        tools:text="adresse " />
+
 </LinearLayout>
