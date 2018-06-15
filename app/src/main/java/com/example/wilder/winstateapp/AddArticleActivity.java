@@ -1,5 +1,6 @@
 package com.example.wilder.winstateapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -86,34 +88,6 @@ public class AddArticleActivity extends AppCompatActivity {
             }
         });
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                final EditText etDescription = findViewById(R.id.et_description);
-                final EditText etLienArticle = findViewById(R.id.lien_article);
-                final EditText etName = findViewById(R.id.et_name);
-
-                String name = etName.getText().toString();
-                String description = etDescription.getText().toString();
-                String lien = etLienArticle.getText().toString();
-
-                UserSingleton sendArticle = UserSingleton.getInstance();
-                String uriString = videoUri.toString();
-                String nameUser = sendArticle.getName();
-
-                mVideo.clear();
-                VideoModel article = new VideoModel(name, description, uriString, lien, 48.862725,2.287592000000018, 0);
-                mVideo.add(article);
-                sendArticle.setVideoModelsList(mVideo);
-
-                Intent intent = new Intent(AddArticleActivity.this, MapsActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -131,9 +105,41 @@ public class AddArticleActivity extends AppCompatActivity {
                 if(rbTechno.isChecked()){
                     theme[0] = " Technologie";
                 }
-                //TODO envoyer singleton
+
             }
 
+        });
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                final EditText etDescription = findViewById(R.id.et_description);
+                final EditText etLienArticle = findViewById(R.id.lien_article);
+                final EditText etName = findViewById(R.id.et_name);
+
+                String name = etName.getText().toString();
+                String description = etDescription.getText().toString();
+                String lien = etLienArticle.getText().toString();
+
+                UserSingleton sendArticle = UserSingleton.getInstance();
+                String uriString = videoUri.toString();
+                double latUser;
+                double longUser;
+
+                latUser =  sendArticle.getLatUser();
+                longUser = sendArticle.getLongUser();
+
+                mVideo.clear();
+                VideoModel article = new VideoModel(name, description, uriString, lien,theme[0], latUser,longUser, 0);
+                mVideo.add(article);
+                sendArticle.setVideoModelsList(mVideo);
+
+                Intent intent = new Intent(AddArticleActivity.this, MapsActivity.class);
+                startActivity(intent);
+
+            }
         });
 
     }
@@ -141,7 +147,7 @@ public class AddArticleActivity extends AppCompatActivity {
     private void dispatchTakeVideoIntent() {
         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
-            takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT,15);
+            takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT,2);
             startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
         }
     }
@@ -154,7 +160,6 @@ public class AddArticleActivity extends AppCompatActivity {
         mVideoView.setVisibility(View.VISIBLE);
 
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-
 
             videoUri = intent.getData();
             mVideoView.setVideoURI(videoUri);
