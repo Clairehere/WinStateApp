@@ -1,5 +1,6 @@
 package com.example.wilder.winstateapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -101,10 +103,14 @@ public class AddArticleActivity extends AppCompatActivity {
 
                 UserSingleton sendArticle = UserSingleton.getInstance();
                 String uriString = videoUri.toString();
-                String nameUser = sendArticle.getName();
+                double latUser;
+                double longUser;
+
+                latUser =  sendArticle.getLatUser();
+                longUser = sendArticle.getLongUser();
 
                 mVideo.clear();
-                VideoModel article = new VideoModel(name, description, uriString, lien, 48.862725,2.287592000000018, 0);
+                VideoModel article = new VideoModel(name, description, uriString, lien, latUser,longUser, 0);
                 mVideo.add(article);
                 sendArticle.setVideoModelsList(mVideo);
 
@@ -141,7 +147,7 @@ public class AddArticleActivity extends AppCompatActivity {
     private void dispatchTakeVideoIntent() {
         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
-            takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT,15);
+            takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT,2);
             startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
         }
     }

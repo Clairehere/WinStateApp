@@ -239,6 +239,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // mettre à jour la position de l'utilisateur
                 moveCameraOnUser(location);
                 mLocationUser = location;
+
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -259,6 +260,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         @Override
                         public void onSuccess(Location location) {
                             moveCameraOnUser(location);
+                            recieveArticle.setLatUser(location.getLatitude());
+                            recieveArticle.setLongUser(location.getLongitude());
                         }
                     });
 

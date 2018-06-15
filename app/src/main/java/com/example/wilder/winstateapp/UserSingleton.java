@@ -14,6 +14,8 @@ public class UserSingleton {
     private String tel;
     private File image;
     private ArrayList<VideoModel> videoModelsList;
+    private double latUser;
+    private double longUser;
 
     public UserSingleton() {
     }
@@ -64,6 +66,22 @@ public class UserSingleton {
 
     public void setVideoModelsList(ArrayList<VideoModel> videoModelsList) {
         this.videoModelsList = videoModelsList;
+    }
+
+    public double getLatUser() {
+        return latUser;
+    }
+
+    public void setLatUser(double latUser) {
+        this.latUser = latUser;
+    }
+
+    public double getLongUser() {
+        return longUser;
+    }
+
+    public void setLongUser(double longUser) {
+        this.longUser = longUser;
     }
 
     public void removeInstance() {
