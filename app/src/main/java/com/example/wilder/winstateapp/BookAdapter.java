@@ -1,11 +1,14 @@
 package com.example.wilder.winstateapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.MediaController;
 import android.widget.RelativeLayout;
@@ -26,31 +29,53 @@ public class BookAdapter extends ExpandablePagerAdapter<VideoModel> {
         super(items);
     }
 
+    boolean playVid = false;
+
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         final ViewGroup rootView = (ViewGroup) LayoutInflater.from(container.getContext()).inflate(R.layout.page, container, false);
         rootView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         ((TextView) rootView.findViewById(R.id.text)).setText(items.get(position).getDescription());
         ((TextView) rootView.findViewById(R.id.header_title)).setText(items.get(position).getTitle());
-        ((TextView) rootView.findViewById(R.id.textadress)).setText(items.get(position).getLinkArticle());
+
+        TextView link = rootView.findViewById(R.id.textadress);
+        link.setText(items.get(position).getLinkArticle());
 
         VideoView miniatureArticle = rootView.findViewById(R.id.header_img);
         miniatureArticle.setVideoURI(Uri.parse(items.get(position).getLinkVideo()));
         miniatureArticle.seekTo(100);
 
+        final VideoView bigArticle = rootView.findViewById(R.id.second_container);
+        bigArticle.setVideoURI(Uri.parse(items.get(position).getLinkVideo()));
+        bigArticle.seekTo(150);
+        bigArticle.setMediaController(new MediaController(rootView.getContext()));
+        bigArticle.requestFocus();
+
+        bigArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (playVid){
+                    bigArticle.pause();
+                    playVid=false;
+                } else {
+                    bigArticle.start();
+                    playVid = true;
+                }
+
+            }
+        });
+
+        link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(items.get(position).getLinkArticle()));
+                rootView.getContext().startActivity(browserIntent);
+            }
+        });
 
 
         return attach(container, rootView, position);
     }
 
-    private void setSpan(TextView textView, String pattern) {
-        float relativeSize = 1.5f;
-        Pattern pat = Pattern.compile(pattern);
-        Matcher m = pat.matcher(textView.getText());
-        if (m.find()) {
-            SpannableString span = new SpannableString(textView.getText());
-            span.setSpan(new RelativeSizeSpan(relativeSize), 0, m.group(0).length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            textView.setText(span);
-        }
-    }
 }

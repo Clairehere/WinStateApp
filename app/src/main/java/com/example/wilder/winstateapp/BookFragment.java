@@ -58,13 +58,6 @@ public class BookFragment extends Fragment {
         if (rootView.findViewById(R.id.cell_img) != null)
             ((SimpleDraweeView) rootView.findViewById(R.id.cell_img)).setImageURI(Uri.parse(myBook.getUrl()));
 
-        VideoView bigVideo = rootView.findViewById(R.id.second_container);
-        bigVideo.setVideoURI(Uri.parse(myBook.getUrl()));
-        bigVideo.setMediaController(new MediaController(rootView.getContext()));
-        bigVideo.requestFocus();
-        bigVideo.start();
-
-
         return rootView;
     }
 
