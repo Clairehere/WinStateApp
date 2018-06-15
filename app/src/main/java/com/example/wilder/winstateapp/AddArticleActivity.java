@@ -50,7 +50,6 @@ public class AddArticleActivity extends AppCompatActivity {
         final RadioButton rbSocial = findViewById(R.id.rb_social);
         final RadioButton rbEcolo = findViewById(R.id.rb_ecolo);
         final RadioButton rbTechno = findViewById(R.id.rb_techno);
-        final RadioButton rbEconomie = findViewById(R.id.tb_economie);
         final String[] theme = {""};
         VideoView mVideoView = findViewById(R.id.videoView2);
 
@@ -97,10 +96,6 @@ public class AddArticleActivity extends AppCompatActivity {
                 }
                 if(rbEcolo.isChecked()){
                     theme[0] = "Ecologie";
-                }
-                if(rbEconomie.isChecked()){
-                    theme[0] = "Economie";
-
                 }
                 if(rbTechno.isChecked()){
                     theme[0] = " Technologie";

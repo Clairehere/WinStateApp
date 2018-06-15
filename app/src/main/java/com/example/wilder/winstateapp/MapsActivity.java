@@ -92,9 +92,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+
+
+        FloatingActionButton fabAddArticle = findViewById(R.id.fab_add_article);
         FloatingActionButton fabProfil = findViewById(R.id.fab_profil);
+
         if(ConnectActivity.CONTRIBUTEUR){
             fabProfil.setVisibility(View.VISIBLE);
+            fabAddArticle.setVisibility(View.VISIBLE);
+
             fabProfil.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -118,7 +124,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(MapsActivity.this);
         askLocationPermission();
 
-        FloatingActionButton fabAddArticle = findViewById(R.id.fab_add_article);
         fabAddArticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
