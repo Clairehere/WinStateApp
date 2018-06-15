@@ -14,7 +14,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -39,7 +42,15 @@ public class AddArticleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_article);
 
         TextView tvdate = findViewById(R.id.tv_date);
-        Button btnAdd = findViewById(R.id.btn_add);
+        final Button btnAdd = findViewById(R.id.btn_add);
+        ImageView btnDelete = findViewById(R.id.iv_delete);
+        RadioGroup radioGroup = findViewById(R.id.radioGroup2);
+        final RadioButton rbSocial = findViewById(R.id.rb_social);
+        final RadioButton rbEcolo = findViewById(R.id.rb_ecolo);
+        final RadioButton rbTechno = findViewById(R.id.rb_techno);
+        final RadioButton rbEconomie = findViewById(R.id.tb_economie);
+        final String[] theme = {""};
+
 
         final Date date = new Date();
         Date newDate = new Date(date.getTime() + (604800000L * 2) + (24 * 60 * 60));
@@ -59,15 +70,24 @@ public class AddArticleActivity extends AppCompatActivity {
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+        btnAdd.setVisibility(View.VISIBLE);
               dispatchTakeVideoIntent();
 
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddArticleActivity.this, MapsActivity.class);
+                startActivity(intent);
             }
         });
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                 final EditText etDescription = findViewById(R.id.et_description);
                 final EditText etLienArticle = findViewById(R.id.lien_article);
@@ -92,6 +112,28 @@ public class AddArticleActivity extends AppCompatActivity {
             }
         });
 
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                if(rbSocial.isChecked()){
+                    theme[0] = "Social";
+                }
+                if(rbEcolo.isChecked()){
+                    theme[0] = "Ecologie";
+                }
+                if(rbEconomie.isChecked()){
+                    theme[0] = "Economie";
+
+                }
+                if(rbTechno.isChecked()){
+                    theme[0] = " Technologie";
+                }
+                //TODO envoyer singleton
+            }
+
+        });
+
     }
 
     private void dispatchTakeVideoIntent() {
@@ -106,6 +148,7 @@ public class AddArticleActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
         final VideoView mVideoView = findViewById(R.id.videoView2);
+
 
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
 

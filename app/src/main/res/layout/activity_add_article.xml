@@ -17,9 +17,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:hint="Nom de votre article"
         android:includeFontPadding="false"
         android:inputType="textPersonName"
-        android:hint="Nom de votre article"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +41,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_name" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tv_theme"
+        tools:layout_editor_absoluteX="10dp">
+
+        <RadioButton
+            android:id="@+id/rb_social"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Social" />
+
+        <RadioButton
+            android:id="@+id/rb_ecolo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ecologie" />
+
+        <RadioButton
+            android:id="@+id/tb_economie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Economie" />
+
+        <RadioButton
+            android:id="@+id/rb_techno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Technologie" />
+    </RadioGroup>
 
     <TextView
         android:id="@+id/tv_title"
@@ -76,26 +114,28 @@
 
     <VideoView
         android:id="@+id/videoView2"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_description" />
+        app:layout_constraintTop_toBottomOf="@+id/camera_button" />
 
     <Button
         android:id="@+id/camera_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/button"
         android:text="Enregistrez votre vidéo"
-        app:layout_constraintBottom_toBottomOf="@+id/videoView2"
-        app:layout_constraintTop_toTopOf="@+id/videoView2"
+        android:textColor="@color/yellowWin"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2"
         tools:layout_editor_absoluteX="0dp" />
 
     <EditText
@@ -106,25 +146,53 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:hint="Lien de l'article"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoView2" />
+        app:layout_constraintTop_toBottomOf="@+id/et_description" />
 
     <Button
         android:id="@+id/btn_add"
         android:layout_width="131dp"
         android:layout_height="129dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/logowinvalidate"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoView2" />
+
+    <TextView
+        android:id="@+id/tv_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/logowinvalidate"
+        android:layout_marginTop="8dp"
+        android:text="Thèmatique : "
+        android:textColor="@android:color/black"
+        app:fontFamily="@font/montserrat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lien_article" />
+
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.372"
+        app:layout_constraintStart_toEndOf="@+id/btn_add"
+        app:layout_constraintTop_toBottomOf="@+id/videoView2"
+        app:srcCompat="@drawable/annullogowin" />
 
 </android.support.constraint.ConstraintLayout>

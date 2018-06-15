@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/header_container"
     android:layout_width="match_parent"
-    android:background="@color/colorHeader"
     android:layout_height="@dimen/header_height"
+    android:background="@color/bleuWin"
     android:clipChildren="false">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/header_img"
         android:layout_width="@dimen/header_height"
         android:layout_height="@dimen/header_height"
-        app:actualImageScaleType="fitCenter"/>
+        app:actualImageScaleType="fitCenter" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -27,16 +27,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Crime and Punishment"
-            android:textColor="@color/colorText"
-            android:textSize="20sp" />
+            android:textColor="@color/yellowWin"
+            android:textSize="20sp"
+            app:fontFamily="@font/montserrat" />
 
         <TextView
             android:id="@+id/header_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fyodor Dostoyevsky"
-            android:textColor="@color/colorText"
-            android:textSize="18sp" />
+            android:textColor="@color/yellowWin"
+            android:textSize="18sp"
+            app:fontFamily="@font/montserrat" />
     </LinearLayout>
 
     <ImageView
@@ -44,9 +46,9 @@
         android:layout_width="@dimen/header_button_size"
         android:layout_height="@dimen/header_button_size"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="25dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="25dp"
         android:scaleType="fitCenter"
         android:src="@drawable/gallery"
-        android:tint="@color/colorText" />
+        android:tint="@color/yellowWin" />
 </RelativeLayout>
