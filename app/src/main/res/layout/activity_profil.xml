@@ -176,16 +176,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/et_name" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:clickable="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_media_rew" />
-
 </android.support.constraint.ConstraintLayout>

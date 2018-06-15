@@ -52,7 +52,7 @@ public class BookFragment extends Fragment {
         rootView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         ((TextView) rootView.findViewById(R.id.text)).setText(myBook.getDescription());
         ((TextView) rootView.findViewById(R.id.header_title)).setText(myBook.getTitle());
-        ((TextView) rootView.findViewById(R.id.header_subtitle)).setText(myBook.getAuthor());
+       // ((TextView) rootView.findViewById(R.id.header_subtitle)).setText(myBook.getAuthor());
         ((SimpleDraweeView) rootView.findViewById(R.id.header_img)).setImageURI(Uri.parse(myBook.getUrl()));
         if (rootView.findViewById(R.id.cell_img) != null)
             ((SimpleDraweeView) rootView.findViewById(R.id.cell_img)).setImageURI(Uri.parse(myBook.getUrl()));
