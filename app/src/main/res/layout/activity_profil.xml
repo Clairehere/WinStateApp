@@ -118,8 +118,8 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Nouveau Nom et Prenom"
-        android:visibility="gone"
+        android:hint="Nouveau Nom et Prenom"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_change" />
@@ -135,8 +135,8 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Nouvelle entreprise"
-        android:visibility="gone"
+        android:hint="Nouvelle entreprise"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_name" />
@@ -153,8 +153,8 @@
         android:ems="10"
         android:inputType="number"
         android:maxLength="10"
-        android:text="Nouveau telephone"
-        android:visibility="gone"
+        android:hint="Nouveau telephone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -168,12 +168,11 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
         android:background="@drawable/logowinvalidate"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/et_name" />
+        app:layout_constraintTop_toBottomOf="@+id/et_tel" />
 
 </android.support.constraint.ConstraintLayout>

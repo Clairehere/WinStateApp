@@ -28,6 +28,7 @@ public class ProfilActivity extends AppCompatActivity {
         tv_name.setText("Nom Prénom : "+userSingleton.getName());
         tv_entreprise.setText("Entreprise : "+userSingleton.getEntreprise());
         tv_tel.setText("Tel : " +userSingleton.getTel());
+        final Button validate = findViewById(R.id.btn_validate);
 
 
 
@@ -37,6 +38,8 @@ public class ProfilActivity extends AppCompatActivity {
                 etName.setVisibility(View.VISIBLE);
                 etEntreprise.setVisibility(View.VISIBLE);
                 etTel.setVisibility(View.VISIBLE);
+                validate.setVisibility(View.VISIBLE);
+
 
 
             }
