@@ -3,7 +3,6 @@ package com.example.wilder.winstateapp;
 import java.util.ArrayList;
 
 public class VideoModel {
-    private String theme;
     private String title;
     private String description;
     private String linkVideo;
@@ -24,16 +23,7 @@ public class VideoModel {
         this.fakenew = fakenew;
     }
 
-    public VideoModel(String theme, String title, String description, String linkVideo, String linkArticle, double latitude, double longitude, int fakenew) {
-        this.theme = theme;
-        this.title = title;
-        this.description = description;
-        this.linkVideo = linkVideo;
-        this.linkArticle = linkArticle;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.fakenew = fakenew;
-    }
+
 
     public String getTitle() {
         return title;
@@ -91,13 +81,6 @@ public class VideoModel {
         this.fakenew = fakenew;
     }
 
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
 
     /**
     public ArrayList<String> getTagList() {
