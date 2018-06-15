@@ -51,6 +51,10 @@ public class BookAdapter extends ExpandablePagerAdapter<VideoModel> {
         bigArticle.setMediaController(new MediaController(rootView.getContext()));
         bigArticle.requestFocus();
 
+        bigArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
                 if (playVid){
                     bigArticle.pause();
                     playVid=false;
