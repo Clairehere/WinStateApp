@@ -362,7 +362,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onInfoWindowClick(Marker marker) {
 
                 //Pop up News
-                AlertDialog.Builder popup = new AlertDialog.Builder(MapsActivity.this);
+                final AlertDialog.Builder popup = new AlertDialog.Builder(MapsActivity.this);
                 LayoutInflater inflater = (LayoutInflater) MapsActivity.this
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View viewpop = inflater.inflate(R.layout.model_layout_article, null);
@@ -378,9 +378,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 popup.setPositiveButton("Fake News", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //TODO mettre en rouge ou invisible
+
                     }
                 });
+
 
                 final AlertDialog dialog = popup.create();
 
@@ -391,7 +392,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 String markerIdProv = marker.getId();
                 String markerID[] = markerIdProv.split("m");
-                int markerId = Integer.parseInt(markerID[1]);
+                final int markerId = Integer.parseInt(markerID[1]);
                 Uri uri =  Uri.parse(mEvent.get(markerId).getLinkVideo());
 
                 videoArticle.setVideoURI(uri);
@@ -403,9 +404,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 titreArticle.setText(mEvent.get(markerId).getTitle());
                 resumeArticle.setText(mEvent.get(markerId).getDescription());
                 lienArticle.setText(mEvent.get(markerId).getLinkArticle());
-
                 dialog.show();
-            marker.setIcon((BitmapDescriptorFactory.fromBitmap(resizeBitmap("winnews_jaune", widthDp, heightDp))));
+
+            lienArticle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mEvent.get(markerId).getLinkArticle()));
+                    startActivity(browserIntent);
+                }
+            });
 
             }
         });

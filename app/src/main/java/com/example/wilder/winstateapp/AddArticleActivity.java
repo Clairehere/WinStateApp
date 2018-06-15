@@ -50,12 +50,14 @@ public class AddArticleActivity extends AppCompatActivity {
         final RadioButton rbTechno = findViewById(R.id.rb_techno);
         final RadioButton rbEconomie = findViewById(R.id.tb_economie);
         final String[] theme = {""};
-
+        VideoView mVideoView = findViewById(R.id.videoView2);
 
         final Date date = new Date();
         Date newDate = new Date(date.getTime() + (604800000L * 2) + (24 * 60 * 60));
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
         String stringdate = dt.format(newDate);
+
+        mVideoView.setVisibility(View.GONE);
 
         tvdate.setText(stringdate);
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -139,7 +141,7 @@ public class AddArticleActivity extends AppCompatActivity {
     private void dispatchTakeVideoIntent() {
         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
-            takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT,5);
+            takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT,15);
             startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
         }
     }
@@ -147,10 +149,12 @@ public class AddArticleActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
-        final VideoView mVideoView = findViewById(R.id.videoView2);
 
+        VideoView mVideoView = findViewById(R.id.videoView2);
+        mVideoView.setVisibility(View.VISIBLE);
 
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
+
 
             videoUri = intent.getData();
             mVideoView.setVideoURI(videoUri);
