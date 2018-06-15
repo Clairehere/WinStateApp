@@ -155,7 +155,6 @@ public class AddArticleActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
 
-
             videoUri = intent.getData();
             mVideoView.setVideoURI(videoUri);
             Button camera = findViewById(R.id.camera_button);
